@@ -124,7 +124,7 @@
     <string name="AlwaysTouchDesc">Always process the DS touchscreen, even when not in touch mode. For games that require using controls and touchscreen at the same time.</string>
     
     <!-- Release 14 -->
-    <string name="Cheatcode">Code</string>
+    <string name="CheatCode">Code</string>
     
     
     <!-- Do not translate -->
