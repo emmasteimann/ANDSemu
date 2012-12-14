@@ -8,7 +8,7 @@
 		<item>Supprimer</item>
 		<!--item>Couper</item-->
 		<!--item>Copier</item-->
-		<item>Envoyer à...</item>
+		<item>Envoyer à&#8230;</item>
 	</string-array>
 	<string name="rom_error">Il y a eu une erreur pendant le chargement de cet ROM :(</string>
 	<string name="OK">OK</string>

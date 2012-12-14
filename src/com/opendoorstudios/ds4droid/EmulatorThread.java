@@ -18,6 +18,7 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import java.io.File;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -111,7 +112,7 @@ class EmulatorThread extends Thread {
 				
 				final File[] cacheFiles = tempDir.listFiles();
 				for(File cacheFile : cacheFiles) {
-					if(cacheFile.getAbsolutePath().toLowerCase().endsWith(".nds"))
+					if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
 						cacheFile.delete();
 				}
 				

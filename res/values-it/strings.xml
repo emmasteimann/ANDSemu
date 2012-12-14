@@ -10,7 +10,7 @@
 		<item>Cancella</item>
 		<!--item>Cut</item-->
 		<!--item>Copy</item-->
-		<item>Invia a...</item>
+		<item>Invia a&#8230;</item>
 	</string-array>
 	<string name="rom_error">C\'è stato un errore caricando la rom :(</string>
 	<string name="OK">OK</string>

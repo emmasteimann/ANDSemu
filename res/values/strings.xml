@@ -10,7 +10,7 @@
 		<item>Delete</item>
 		<!--item>Cut</item-->
 		<!--item>Copy</item-->
-		<item>Send To...</item>
+		<item>Send To&#8230;</item>
 	</string-array>
 	<string name="rom_error">There was an error loading this ROM :(</string>
 	<string name="OK">OK</string>
@@ -122,6 +122,10 @@
     <string name="EnableMicrophoneDesc">Use your device\'s microphone as the DS microphone.</string>
     <string name="AlwaysTouch">Always allow touch</string>
     <string name="AlwaysTouchDesc">Always process the DS touchscreen, even when not in touch mode. For games that require using controls and touchscreen at the same time.</string>
+    
+    <!-- Release 14 -->
+    <string name="Cheatcode">Code</string>
+    
     
     <!-- Do not translate -->
     <string-array name="filternames">

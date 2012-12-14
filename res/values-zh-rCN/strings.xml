@@ -10,7 +10,7 @@
 		<item>删除</item>
 		<!--item>剪切</item-->
 		<!--item>拷贝</item-->
-		<item>发送至...</item>
+		<item>发送至&#8230;</item>
 	</string-array>
 	<string name="rom_error">读取ROM出错(</string>
 	<string name="OK">确定</string>

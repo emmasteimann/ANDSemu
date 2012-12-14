@@ -10,7 +10,7 @@
 		<item>Löschen</item>
 		<!--item>Ausschneiden</item-->
 		<!--item>Kopieren</item-->
-		<item>Senden an...</item>
+		<item>Senden an&#8230;</item>
 	</string-array>
 	<string name="rom_error">Fehler beim Laden des ROM :(</string>
 	<string name="OK">OK</string>
@@ -43,7 +43,7 @@
     <string name="showtouchmsgdesc">Display a message to the user explaining touch/keypad mode switching.</string>
     
     <!-- Release 3 -->
-    <string name="loading">Läd</string>    
+    <string name="loading">Lädt</string>    
     
     <!-- Release 4 -->
     <string name="filter">Screen filter</string>
