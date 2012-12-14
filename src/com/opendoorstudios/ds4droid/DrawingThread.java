@@ -25,7 +25,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import com.opendoorstudios.ds4droid.MainActivity.NDSView;
 
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 
 class DrawingThread extends Thread{
 	

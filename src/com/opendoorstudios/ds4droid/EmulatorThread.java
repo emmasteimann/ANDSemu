@@ -25,7 +25,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 class EmulatorThread extends Thread {
 	

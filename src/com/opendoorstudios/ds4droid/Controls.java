@@ -18,7 +18,6 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.opendoorstudios.ds4droid.MainActivity.NDSView;
 
