@@ -1,4 +1,7 @@
 # -- nds4droid ignores --
+# ndk build files
+libs/
+obj/
 
 # -- Android ignores ----
 # built application files
