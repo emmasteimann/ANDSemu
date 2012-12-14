@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.opendoorstudios.ds4droid"
-    android:versionCode="13"
-    android:versionName="13" >
+    android:versionCode="14"
+    android:versionName="miraie-14" >
 
     <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="10" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
     
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
