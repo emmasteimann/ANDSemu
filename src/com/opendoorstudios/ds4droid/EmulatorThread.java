@@ -97,6 +97,12 @@ class EmulatorThread extends Thread {
 				DeSmuME.context = activity;
 				DeSmuME.load();
 				
+				// Check external storage availability
+				if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+					Log.e(MainActivity.TAG, "External media must be mounted.");
+				}
+				
+				
 				final String defaultWorkingDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/nds4droid";
 				final String path = PreferenceManager.getDefaultSharedPreferences(activity).getString(Settings.DESMUME_PATH, defaultWorkingDir);
 				final File workingDir = new File(path);
@@ -111,11 +117,9 @@ class EmulatorThread extends Thread {
 				//clear any previously extracted ROMs
 				
 				final File[] cacheFiles = tempDir.listFiles();
-				if (cacheFiles != null) {
-					for(File cacheFile : cacheFiles) {
-						if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
-							cacheFile.delete();
-					}
+				for(File cacheFile : cacheFiles) {
+					if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
+						cacheFile.delete();
 				}
 				
 				DeSmuME.init();
