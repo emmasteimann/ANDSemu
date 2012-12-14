@@ -25,6 +25,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 class EmulatorThread extends Thread {
 	
@@ -110,9 +111,11 @@ class EmulatorThread extends Thread {
 				//clear any previously extracted ROMs
 				
 				final File[] cacheFiles = tempDir.listFiles();
-				for(File cacheFile : cacheFiles) {
-					if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
-						cacheFile.delete();
+				if (cacheFiles != null) {
+					for(File cacheFile : cacheFiles) {
+						if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
+							cacheFile.delete();
+					}
 				}
 				
 				DeSmuME.init();
