@@ -765,7 +765,7 @@ void JNI(init, jobject _inst)
 	sndbuffersize = GetPrivateProfileInt(env, "Sound","SoundBufferSize2", DESMUME_SAMPLE_RATE*8/60, IniName);
 	SPU_ChangeSoundCore(sndcoretype, sndbuffersize);
 	
-	static const char* nickname = "emozilla";
+	static const char* nickname = "Player";
 	fw_config.nickname_len = strlen(nickname);
 	for(int i = 0 ; i < fw_config.nickname_len ; ++i)
 		fw_config.nickname[i] = nickname[i];

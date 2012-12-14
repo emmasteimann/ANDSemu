@@ -19,12 +19,10 @@ package com.opendoorstudios.ds4droid;
 
 import android.app.Application;
 
-//@ReportsCrashes(formKey = "")
 public class ds4droidApplication extends Application {
 	
 	@Override
 	public void onCreate() {
-		//ACRA.init(this);
 		super.onCreate();
 	}
 
