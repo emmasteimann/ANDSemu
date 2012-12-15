@@ -1,0 +1,7 @@
+== todo && idea list ==
+
+- remove unrar lib due to license conflict
+- seperate desmume native code from archiving libs
+- write or find a lua script for performance testing
+- gracefully handle un-write-able external media
+- 
