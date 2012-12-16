@@ -10,3 +10,4 @@
 - copy english strings into the translations where needed
 - create debug compile mode
 - integrate android-ndk-profiler
+- explore multi-threading in desmume
