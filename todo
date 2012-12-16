@@ -1,13 +1,20 @@
 == todo && idea list ==
 
-- remove unrar lib due to license conflict
-- seperate desmume native code from archiving libs
-- write or find a lua script for performance testing
+* High level *
 - gracefully handle un-write-able external media
 - replace copyrighted mario promotional.fw.png
 - find where promotional.fw.png is used
 - address lint warnigns
 - copy english strings into the translations where needed
+- google translate untranslated strings
+- write or find a lua script for performance testing
+- write a readme, credit desmume, emozilla, and libraries
+
+* low level *
+- seperate desmume native code from archiving libs
+- remove unrar lib due to license conflict
 - create debug compile mode
 - integrate android-ndk-profiler
-- explore multi-threading in desmume
+- turn on multi-threading in desmume
+- extract desmume into a seperate git repo with git submodules
+- test if -02's smaller binary increases speed
