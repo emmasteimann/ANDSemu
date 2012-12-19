@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	NDSView view;
 	static final String TAG = "nds4droid";
 	Dialog loadingDialog = null;
-	
+
 	Handler msgHandler = new Handler() {
 		
 		@Override
@@ -202,7 +202,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		final int CHEAT_MENU_INDEX = 6;
 		pauseEmulation();
 		menu.findItem(R.id.cheats).setVisible(DeSmuME.romLoaded);
 		return true;

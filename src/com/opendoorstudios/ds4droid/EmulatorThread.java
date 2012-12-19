@@ -158,7 +158,6 @@ class EmulatorThread extends Thread {
 					soundPaused = false;
 				}
 				
-				long frameStartTime = System.currentTimeMillis();
 				inFrameLock.lock();
 				DeSmuME.runCore();
 				inFrameLock.unlock();

@@ -29,7 +29,6 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -71,13 +70,12 @@ public class FileDialog extends ListActivity {
 
 	private List<String> path = null;
 	private TextView myPath;
-	private EditText mFileName;
 	private ArrayList<HashMap<String, Object>> mList;
 
 	private String parentPath;
 	private String currentPath = ROOT;
 
-	private int selectionMode = SelectionMode.MODE_CREATE;
+	//private int selectionMode = SelectionMode.MODE_CREATE;
 
 	private String[] formatFilter = null;
 
@@ -96,7 +94,7 @@ public class FileDialog extends ListActivity {
 		myPath = (TextView) findViewById(R.id.path);
 
 
-		selectionMode = getIntent().getIntExtra(SELECTION_MODE, SelectionMode.MODE_CREATE);
+		//selectionMode = getIntent().getIntExtra(SELECTION_MODE, SelectionMode.MODE_CREATE);
 
 		formatFilter = getIntent().getStringArrayExtra(FORMAT_FILTER);
 

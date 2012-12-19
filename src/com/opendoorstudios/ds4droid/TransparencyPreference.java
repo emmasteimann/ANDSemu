@@ -41,7 +41,6 @@ public class TransparencyPreference extends DialogPreference implements OnSeekBa
 
 	private SeekBar seek;
 	private ImageView img;
-	private DisplayMetrics metrics;
 
 	static final int defaultValue = 78;
 	private int currentValue;
