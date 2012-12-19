@@ -11,10 +11,9 @@
 - write a readme, credit desmume, emozilla, and libraries
 
 * low level *
-- seperate desmume native code from archiving libs
 - remove unrar lib due to license conflict
 - create debug compile mode
 - integrate android-ndk-profiler
 - turn on multi-threading in desmume
 - extract desmume into a seperate git repo with git submodules
-- test if -02's smaller binary increases speed
+
