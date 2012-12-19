@@ -9,9 +9,9 @@
 - google translate untranslated strings
 - write or find a lua script for performance testing
 - write a readme, credit desmume, emozilla, and libraries
+- remove all refernces to rar from ui
 
 * low level *
-- remove unrar lib due to license conflict
 - create debug compile mode
 - integrate android-ndk-profiler
 - turn on multi-threading in desmume
