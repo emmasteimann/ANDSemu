@@ -2,8 +2,6 @@
 
 * High level *
 - gracefully handle un-write-able external media
-- replace copyrighted mario promotional.fw.png
-- find where promotional.fw.png is used
 - address lint warnigns
 - copy english strings into the translations where needed
 - google translate untranslated strings
