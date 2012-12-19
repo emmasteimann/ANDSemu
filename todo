@@ -16,4 +16,6 @@
 - integrate android-ndk-profiler
 - turn on multi-threading in desmume
 - extract desmume into a seperate git repo with git submodules
+- create 'upstream' git repo for desmume upstream
+- get upstream's x86 JIT working on intel android images
 
