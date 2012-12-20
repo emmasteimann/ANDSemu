@@ -20,7 +20,6 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.preference.DialogPreference;
