@@ -44,6 +44,7 @@ public class TransparencyPreference extends DialogPreference implements OnSeekBa
 	static final int defaultValue = 78;
 	private int currentValue;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected View onCreateDialogView() {
 
@@ -94,6 +95,7 @@ public class TransparencyPreference extends DialogPreference implements OnSeekBa
 		return summary + " (currently " + value + "%)";
 	}
 
+	@SuppressWarnings("deprecation")
 	public void onProgressChanged(SeekBar seek, int value, boolean fromTouch) {
 		currentValue = value;
 		img.setAlpha((int)(currentValue * 2.55f));

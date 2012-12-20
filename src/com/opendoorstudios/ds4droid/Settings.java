@@ -37,6 +37,7 @@ public class Settings extends PreferenceActivity {
 	
 	static final int EDIT_LAYOUT_ID = 1337;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
