@@ -105,6 +105,8 @@
     
     <!-- Release 14 -->
     <string name="CheatCode">Code</string>
+    <string name="CurrentValue">Current value</string>
+    <string name="ImageOfFolder">Image of file</string>
     
     
     <!-- Do not translate -->

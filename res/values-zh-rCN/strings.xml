@@ -2,28 +2,13 @@
     
 	<!-- Release 1 -->
     <string name="app_name">nds4droid</string>
-    <string name="hello_world">测试程序!</string>
-    <string name="menu_settings">设置</string>
     <string name="title_activity_main">nds4droid</string>
-	<string-array name="file_options">
-		<!--item>重命名</item--> 
-		<item>删除</item>
-		<!--item>剪切</item-->
-		<!--item>拷贝</item-->
-		<item>发送至&#8230;</item>
-	</string-array>
 	<string name="rom_error">读取ROM出错(</string>
 	<string name="OK">确定</string>
 	<string name="location">定位</string>
     <string name="cant_read_folder">无法读取文件夹</string>
-    <string name="nnew">新建</string>
-    <string name="select">选择</string>
-    <string name="file_name">文件名：</string>
     <string name="cancel">取消</string>
-    <string name="create">保存</string>
     <string name="no_data">无数据</string>
-    <color name="gray">#ffff0000</color>
-    <string name="err">错误</string>
     <string name="Load">读取</string>
     <string name="QuickSave">快速保存</string>
     <string name="QuickRestore">快速恢复</string>
@@ -39,8 +24,6 @@
     <string name="vsyncdesc">只在帧间绘制屏幕. 可以减慢仿真，如关闭会导致图像故障</string>
     <string name="fps">显示 FPS</string>
     <string name="fpsdesc">绘制 FPS 到屏幕</string>
-    <string name="showtouchmsg">显示触摸信息</string>
-    <string name="showtouchmsgdesc">在触屏和键盘模式间切换时，显示一条消息给用户</string>
     
     <!-- Release 3 -->
     <string name="loading">加载中</string>    
@@ -59,8 +42,6 @@
     </string-array>
     <string name="sound">开启声音</string>
     <string name="sounddesc">开启音频回放和音频处理。关闭此项可以提高性能</string>
-    <string name="showsoundmsg">显示声音信息</string>
-    <string name="showsoundmsgdesc">显示一条消息询问用户是否需要开启声音</string>
     <string name="soundmsg">是否需要开启声音? 这会导致降低 3 到5 FPS 的性能</string>
     <string name="yes">是</string>
     <string name="no">否</string>

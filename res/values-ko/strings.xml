@@ -2,28 +2,13 @@
     
 	<!-- Release 1 -->
     <string name="app_name">nds4droid</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">설정</string>
     <string name="title_activity_main">nds4droid</string>
-	<string-array name="file_options">
-		<!--item>이름변경</item--> 
-		<item>삭제</item>
-		<!--item>잘라내기</item-->
-		<!--item>복사</item-->
-		<item>보내기</item>
-	</string-array>
 	<string name="rom_error">ROM 로딩 중 에러가 발생하였습니다 :(</string>
 	<string name="OK">OK</string>
 	<string name="location">위치</string>
     <string name="cant_read_folder">폴더를 읽을 수 없습니다!</string>
-    <string name="nnew">새로 만들기</string>
-    <string name="select">선택</string>
-    <string name="file_name">파일명:</string>
     <string name="cancel">취소</string>
-    <string name="create">세이브</string>
     <string name="no_data">데이터 없음</string>
-    <color name="gray">#ffff0000</color>
-    <string name="err">에러</string>
     <string name="Load">로드</string>
     <string name="QuickSave">빠른 세이브</string>
     <string name="QuickRestore">빠른 복원</string>
@@ -39,8 +24,6 @@
     <string name="vsyncdesc">화면의 주사율에 맞게 게임 화면의 갱신 속도를 동기화 합니다. 에뮬레이션을 느리게 하지만 꺼져있을 경우 화면에 글리치가 발생할 수 있습니다.</string>
     <string name="fps">FPS 보여주기</string>
     <string name="fpsdesc">FPS 를 스크린에 그립니다.</string>
-    <string name="showtouchmsg">터치 메시지 보여주기</string>
-    <string name="showtouchmsgdesc">터치방식/키패드방식 모드 변환에 관한 설명 메시지를 보여줍니다.</string>
     
     <!-- Release 3 -->
     <string name="loading">로딩</string>    
@@ -59,8 +42,6 @@
     </string-array>
     <string name="sound">사운드 켜기</string>
     <string name="sounddesc">오디오 처리 및 재생 사용하기. 끌경우 게임 속도가 향상 됩니다.</string>
-    <string name="showsoundmsg">사운드 메시지 보여주기</string>
-    <string name="showsoundmsgdesc">게임 사운드를 켜고 끔에 관하여 사용자의 의향을 묻는 메시지를 보여줍니다.</string>
     <string name="soundmsg">게임 사운드를 켜시겠습니까? 사운드를 켜실 경우 3 에서 5 FPS 성능 저하가 발생하게됩니다.</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>

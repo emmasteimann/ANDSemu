@@ -3,6 +3,7 @@ package com.opendoorstudios.ds4droid;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -158,6 +159,7 @@ public class ButtonLayoutEditor extends Activity {
 		}
 		
 		
+		@SuppressLint("UseSparseArrays")
 		final HashMap<Integer, Editing> editing = new HashMap<Integer, Editing>();
 		Editing scaling = null;
 		boolean handledScaleEvent = false;

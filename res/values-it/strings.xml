@@ -2,28 +2,13 @@
     
 	<!-- Release 1 -->
     <string name="app_name">nds4droid</string>
-    <string name="hello_world">Ciao mondo!</string>
-    <string name="menu_settings">Impostazioni</string>
     <string name="title_activity_main">nds4droid</string>
-	<string-array name="file_options">
-		<!--item>Rename</item--> 
-		<item>Cancella</item>
-		<!--item>Cut</item-->
-		<!--item>Copy</item-->
-		<item>Invia a&#8230;</item>
-	</string-array>
 	<string name="rom_error">C\'è stato un errore caricando la rom :(</string>
 	<string name="OK">OK</string>
 	<string name="location">Posizione</string>
      <string name="cant_read_folder">La cartella non può essere letta</string>
-    <string name="nnew">Nuovo</string>
-    <string name="select">Seleziona</string>
-    <string name="file_name">Nome del file:</string>
     <string name="cancel">Annulla</string>
-    <string name="create">Salva</string>
     <string name="no_data">Niente dati</string>
-    <color name="gray">#ffff0000</color>
-    <string name="err">Errore</string>
     <string name="Load">Carica</string>
     <string name="QuickSave">Salvataggio veloce</string>
     <string name="QuickRestore">Ripristino veloce</string>
@@ -39,8 +24,6 @@
     <string name="vsyncdesc">Disegna solamente allo scherzo tra i fotogrammi. Può rallentare l\'emulazione ma disabilitare può causare problem grafici.</string>
     <string name="fps">Mostra FPS</string>
     <string name="fpsdesc">Mostra gli FPS sullo schermo.</string>
-    <string name="showtouchmsg">Mostra messaggio touch</string>
-    <string name="showtouchmsgdesc">Mostra un messaggio all\'utente spiegando il cambio di modalità tra touch/keypad.</string>
     
     <!-- Release 3 -->
     <string name="loading">Caricamento</string>    
@@ -59,8 +42,6 @@
     </string-array>
     <string name="sound">Abilita suono</string>
     <string name="sounddesc">Abilita l\'elaborazione ed il playback del suono. Disabilitare può aumentare la performance.</string>
-    <string name="showsoundmsg">Mostra messaggio audio</string>
-    <string name="showsoundmsgdesc">Mostra una domanda all\'utente chiedendo se vogliono abilitare il suono.</string>
     <string name="soundmsg">Vorresti abilitare il suono? Questo può causare una perdita di performance da 3 a 5 FPS.</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
@@ -115,7 +96,6 @@
     <string name="Edit">Modifica</string>
     <string name="Delete">Cancella</string>
     <string name="Description">Descrizione</string>
-    <string name="Code">Codice</string>
     
     <!-- Do not translate -->
     <string-array name="filternames">

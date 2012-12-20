@@ -18,7 +18,7 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import java.util.HashMap;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -26,6 +26,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.preference.PreferenceManager;
 
+@SuppressLint("UseSparseArrays")
 class Button {
 	
 	Button(int id) {

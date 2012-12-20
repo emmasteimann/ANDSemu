@@ -17,6 +17,7 @@ package com.opendoorstudios.ds4droid;
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -49,6 +50,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
+@SuppressLint("HandlerLeak")
 public class MainActivity extends Activity implements OnSharedPreferenceChangeListener {
 
 	static EmulatorThread coreThread;
