@@ -97,6 +97,17 @@
     <string name="Delete">Cancella</string>
     <string name="Description">Descrizione</string>
     
+    <!-- Release 12 -->
+    <string name="EnableMicrophone">Enable microphone</string>
+    <string name="EnableMicrophoneDesc">Use your device\'s microphone as the DS microphone.</string>
+    <string name="AlwaysTouch">Always allow touch</string>
+    <string name="AlwaysTouchDesc">Always process the DS touchscreen, even when not in touch mode. For games that require using controls and touchscreen at the same time.</string>
+    
+    <!-- Release 14 -->
+    <string name="CheatCode">Code</string>
+    <string name="CurrentValue">Current value</string>
+    <string name="ImageOfFolder">Image of file</string>
+    
     <!-- Do not translate -->
     <string-array name="filternames">
         <item>Normal</item>

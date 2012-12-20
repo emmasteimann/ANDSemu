@@ -74,6 +74,25 @@
 	<string name="Language">Langue</string>
 	<string name="LanguageDesc">La langue du système. Multilingual ROMs use this setting. Les changements vont être appliqué sur le prochain chargement de ROM.</string>
 	<string name="Gameplay">Gameplay</string>
+    
+    <!-- Release 11 -->
+    <string name="AddCheat">Add a new Action Replay cheat</string>
+    <string name="Cheats">Cheats</string>
+    <string name="Exit">Exit</string>
+    <string name="Edit">Edit</string>
+    <string name="Delete">Delete</string>
+    <string name="Description">Description</string>
+    
+    <!-- Release 12 -->
+    <string name="EnableMicrophone">Enable microphone</string>
+    <string name="EnableMicrophoneDesc">Use your device\'s microphone as the DS microphone.</string>
+    <string name="AlwaysTouch">Always allow touch</string>
+    <string name="AlwaysTouchDesc">Always process the DS touchscreen, even when not in touch mode. For games that require using controls and touchscreen at the same time.</string>
+    
+    <!-- Release 14 -->
+    <string name="CheatCode">Code</string>
+    <string name="CurrentValue">Current value</string>
+    <string name="ImageOfFolder">Image of file</string>
 	
 	<!-- Do not translate -->
 	<string-array name="filternames">
