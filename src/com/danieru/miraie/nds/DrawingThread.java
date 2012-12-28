@@ -1,4 +1,4 @@
-package com.opendoorstudios.ds4droid;
+package com.danieru.miraie.nds;
 
 /*
 Copyright (C) 2012 Jeffrey Quesnelle
@@ -22,7 +22,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.opendoorstudios.ds4droid.MainActivity.NDSView;
+import com.danieru.miraie.nds.MainActivity.NDSView;
 
 import android.graphics.Canvas;
 

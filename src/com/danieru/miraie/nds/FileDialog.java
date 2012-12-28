@@ -1,4 +1,4 @@
-package com.opendoorstudios.ds4droid;
+package com.danieru.miraie.nds;
 
 /*
 	Copyright (C) 2012 Jeffrey Quesnelle
@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TreeMap;
-
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;

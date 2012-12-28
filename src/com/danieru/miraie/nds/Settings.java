@@ -1,4 +1,4 @@
-package com.opendoorstudios.ds4droid;
+package com.danieru.miraie.nds;
 
 /*
 Copyright (C) 2012 Jeffrey Quesnelle
@@ -19,7 +19,6 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 
 import java.util.Locale;
 import java.util.Map.Entry;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

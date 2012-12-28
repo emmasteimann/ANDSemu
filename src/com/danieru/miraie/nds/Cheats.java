@@ -1,4 +1,4 @@
-package com.opendoorstudios.ds4droid;
+package com.danieru.miraie.nds;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -1,4 +1,4 @@
-package com.opendoorstudios.ds4droid;
+package com.danieru.miraie.nds;
 
 /*
 Copyright (C) 2012 Jeffrey Quesnelle
@@ -18,9 +18,7 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import java.util.ArrayList;
-
-import com.opendoorstudios.ds4droid.MainActivity.NDSView;
-
+import com.danieru.miraie.nds.MainActivity.NDSView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;

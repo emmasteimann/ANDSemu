@@ -18,7 +18,7 @@
 #include <cpu-features.h>
 #include <jni.h>
 
-#define JNI_NOARGS(X) Java_com_opendoorstudios_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz)
+#define JNI_NOARGS(X) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz)
 
 #define CPUTYPE_COMPAT 0
 #define CPUTYPE_V7 1

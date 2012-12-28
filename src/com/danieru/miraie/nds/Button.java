@@ -1,4 +1,4 @@
-package com.opendoorstudios.ds4droid;
+package com.danieru.miraie.nds;
 
 /*
 Copyright (C) 2012 Jeffrey Quesnelle

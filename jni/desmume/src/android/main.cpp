@@ -46,8 +46,8 @@
 #include "neontest.h"
 #endif
 
-#define JNI(X,...) Java_com_opendoorstudios_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
-#define JNI_NOARGS(X) Java_com_opendoorstudios_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz)
+#define JNI(X,...) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
+#define JNI_NOARGS(X) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz)
 
 unsigned int frameCount = 0;
 
@@ -925,7 +925,7 @@ void JNI_NOARGS(closeRom)
 
 unsigned int GetPrivateProfileInt(JNIEnv* env, const char* lpAppName, const char* lpKeyName, int nDefault, const char* lpFileName)
 {
-	jclass javaClass = env->FindClass("com/opendoorstudios/ds4droid/DeSmuME");
+	jclass javaClass = env->FindClass("com/danieru/miraie/nds/DeSmuME");
 	if(!javaClass)
 		return nDefault;
 	jmethodID getSettingInt = env->GetStaticMethodID(javaClass, "getSettingInt","(Ljava/lang/String;I)I");

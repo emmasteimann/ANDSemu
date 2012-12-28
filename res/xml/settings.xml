@@ -26,7 +26,7 @@
           <CheckBoxPreference android:title="@string/UseTouchLand" android:summary="@string/UseTouchLandDesc" android:key="Controls.Landscape.Draw"/>
           <CheckBoxPreference android:title="@string/Haptic" android:summary="@string/HapticDesc" android:key="Controls.Haptic"/>
           <CheckBoxPreference android:title="@string/AlwaysTouch" android:summary="@string/AlwaysTouchDesc" android:key="Controls.AlwaysTouch" />
-          <com.opendoorstudios.ds4droid.TransparencyPreference
+          <com.danieru.miraie.nds.TransparencyPreference
 			android:key="Controls.Transparency"
 			android:title="@string/ButtonTrans"
 			android:dialogTitle="@string/ButtonTrans"

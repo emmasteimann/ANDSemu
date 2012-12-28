@@ -1,8 +1,7 @@
-package com.opendoorstudios.ds4droid;
+package com.danieru.miraie.nds;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
