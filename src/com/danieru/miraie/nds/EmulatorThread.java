@@ -103,7 +103,7 @@ class EmulatorThread extends Thread {
 				}
 				
 				
-				final String defaultWorkingDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/nds4droid";
+				final String defaultWorkingDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ANDSemu";
 				final String path = PreferenceManager.getDefaultSharedPreferences(activity).getString(Settings.DESMUME_PATH, defaultWorkingDir);
 				final File workingDir = new File(path);
 				final File tempDir = new File(path + "/Temp");
@@ -113,6 +113,7 @@ class EmulatorThread extends Thread {
 				new File(path + "/States").mkdir();
 				new File(path + "/Battery").mkdir();
 				new File(path + "/Cheats").mkdir();
+				new File(path + "/Games").mkdir();
 				
 				//clear any previously extracted ROMs
 				
