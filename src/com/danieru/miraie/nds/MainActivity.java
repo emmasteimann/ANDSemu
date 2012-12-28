@@ -166,8 +166,8 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	void pickRom() {
 		Intent i = new Intent(this, FileDialog.class);
 		i.setAction(Intent.ACTION_PICK);
-		i.putExtra(FileDialog.START_PATH, Environment.getExternalStorageDirectory().getAbsolutePath());
-		i.putExtra(FileDialog.FORMAT_FILTER, new String[] {".nds", ".zip", ".7z", ".rar"});
+		i.putExtra(FileDialog.START_PATH, Environment.getExternalStorageDirectory().getAbsolutePath() + "/ANDSemu/Games/");
+		i.putExtra(FileDialog.FORMAT_FILTER, new String[] {".nds", ".zip", ".7z"});
 		startActivityForResult(i, PICK_ROM);
 	}
 	

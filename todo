@@ -5,7 +5,7 @@
 - write or find a lua script for performance testing
 - write a readme, credit desmume, emozilla, and guy who made the nds image
 - in-app about page, show readme
-- remove all refernces to rar from ui
+- file dialog should open the directory where we last loaded a rom from
 
 * low level *
 - integrate android-ndk-profiler
