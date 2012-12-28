@@ -66,6 +66,19 @@ LOCAL_SRC_FILES			:= 	desmume/src/aggdraw.cpp \
 							desmume/src/utils/libfat/lock.cpp \
 							desmume/src/utils/libfat/file_allocation_table.cpp \
 							desmume/src/utils/libfat/filetime.cpp \
+							desmume/src/utils/AsmJit/AssemblerX86X64.cpp \
+							desmume/src/utils/AsmJit/CodeGenerator.cpp \
+							desmume/src/utils/AsmJit/Compiler.cpp \
+							desmume/src/utils/AsmJit/CompilerX86X64.cpp \
+							desmume/src/utils/AsmJit/CpuInfo.cpp \
+							desmume/src/utils/AsmJit/Defs.cpp \
+							desmume/src/utils/AsmJit/DefsX86X64.cpp \
+							desmume/src/utils/AsmJit/Logger.cpp \
+							desmume/src/utils/AsmJit/MemoryManager.cpp \
+							desmume/src/utils/AsmJit/MemoryMarker.cpp \
+							desmume/src/utils/AsmJit/OperandX86X64.cpp \
+							desmume/src/utils/AsmJit/Platform.cpp \
+							desmume/src/utils/AsmJit/Util.cpp \
 							desmume/src/path.cpp \
 							desmume/src/fs-linux.cpp \
 							desmume/src/saves.cpp \
