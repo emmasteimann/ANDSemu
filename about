@@ -1,0 +1,15 @@
+ANDSemu is a fork of nds4droid. nds4droid in turn is a port of DeSmuME to
+android by Jeffrey Quesnelle.
+
+ANDSemu is done by a group of university friends collectivly known as team
+miraie.
+
+Credits:
+Jeffrey Quesnelle (emozilla), for nds4droid
+Team DeSmuME, for DeSmuME
+Sykonist, for the icon of the white nds (only used in development)
+Evan-Amos, for his contrabutions to wikipedia and our current blue fat nds icon
+Alexander Ponomarev, for android-file-dialog 
+Lachlan Tychsen - Smith, for math-neon
+Maxim Shemanarev, for Anti-Grain Geometry (AGG)
+p7zip & 7zip, for powerful archiving 
