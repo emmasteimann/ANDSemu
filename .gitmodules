@@ -1,3 +1,0 @@
-[submodule "jni/desmume"]
-	path = jni/desmume
-	url = git@gitorious.org:nds-miraie/desmume-miraie.git
