@@ -2,7 +2,6 @@
 
 * High level *
 - brainstorm new app name
-- change package url
 - gracefully handle un-write-able external media
 - google translate untranslated strings
 - write or find a lua script for performance testing
@@ -12,7 +11,4 @@
 
 * low level *
 - integrate android-ndk-profiler
-- extract desmume into a seperate git repo with git submodules
-- create 'upstream' git repo for desmume upstream
-- get upstream's x86 JIT working on intel android images
 
