@@ -1,8 +1,8 @@
 <resources>
     
 	<!-- Release 1 -->
-    <string name="app_name">nds4droid</string>
-    <string name="title_activity_main">nds4droid</string>
+    <string name="app_name">ANDSemu</string>
+    <string name="title_activity_main">ANDSemu</string>
 	<string name="rom_error">ROM 로딩 중 에러가 발생하였습니다 :(</string>
 	<string name="OK">OK</string>
 	<string name="location">위치</string>

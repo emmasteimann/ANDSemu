@@ -1,8 +1,8 @@
 <resources>
     
 	<!-- Release 1 -->
-    <string name="app_name">nds4droid</string>
-    <string name="title_activity_main">nds4droid</string>
+    <string name="app_name">ANDSemu</string>
+    <string name="title_activity_main">ANDSemu</string>
 	<string name="rom_error">There was an error loading this ROM :(</string>
 	<string name="OK">OK</string>
 	<string name="location">Location</string>
@@ -30,7 +30,7 @@
     
     <!-- Release 4 -->
     <string name="filter">Screen filter</string>
-    <string name="filterdesc">Filter to use when upscaling from Nintendo DS resolution to your sceren. Higher quality filters may degrade performance.</string>
+    <string name="filterdesc">Filter to use when upscaling from Nintendo DS resolution to your screen. Higher quality filters may degrade performance.</string>
     
     <!-- Release 5 -->
     <string name="threedrenderer">3D Renderer</string>

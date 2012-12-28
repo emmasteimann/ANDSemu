@@ -19,7 +19,7 @@ package com.danieru.miraie.nds;
 
 import android.app.Application;
 
-public class ds4droidApplication extends Application {
+public class ANDSemuApplication extends Application {
 	
 	@Override
 	public void onCreate() {

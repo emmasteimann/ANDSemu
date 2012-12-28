@@ -1,6 +1,6 @@
 <resources>
-	<string name="app_name">nds4droid</string>
-	<string name="title_activity_main">nds4droid</string>
+    <string name="app_name">ANDSemu</string>
+    <string name="title_activity_main">ANDSemu</string>
 	<string name="rom_error">Il y a eu une erreur pendant le chargement de cet ROM :(</string>
 	<string name="OK">OK</string>
 	<string name="location">Position</string>
