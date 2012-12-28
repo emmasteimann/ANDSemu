@@ -1,8 +1,6 @@
 == todo && idea list ==
 
 * High level *
-- brainstorm new app name
-- gracefully handle un-write-able external media
 - google translate untranslated strings
 - write or find a lua script for performance testing
 - write a readme, credit desmume, emozilla, and guy who made the nds image
