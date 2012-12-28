@@ -117,9 +117,11 @@ class EmulatorThread extends Thread {
 				//clear any previously extracted ROMs
 				
 				final File[] cacheFiles = tempDir.listFiles();
-				for(File cacheFile : cacheFiles) {
-					if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
-						cacheFile.delete();
+				if(cacheFiles != null) {
+					for(File cacheFile : cacheFiles) {
+						if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
+							cacheFile.delete();
+					}
 				}
 				
 				DeSmuME.init();
