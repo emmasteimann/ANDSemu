@@ -13,4 +13,5 @@
 * low level *
 - integrate android-ndk-profiler
 - get upstream's x86 JIT working on intel android images
+- FASTCALL on android?
 
