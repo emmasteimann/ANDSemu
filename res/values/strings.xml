@@ -9,7 +9,7 @@
     <string name="cant_read_folder">Folder can\'t be read!</string>
     <string name="cancel">Cancel</string>
     <string name="no_data">No Data</string>
-    <string name="Load">Load</string>
+    <string name="Load">Load ROM</string>
     <string name="QuickSave">Quick Save</string>
     <string name="QuickRestore">Quick Restore</string>
     <string name="SaveState">Save State</string>

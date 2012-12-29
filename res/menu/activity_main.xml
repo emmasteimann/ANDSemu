@@ -1,10 +1,14 @@
 
     <menu xmlns:android="http://schemas.android.com/apk/res/android">
 		<item android:id="@+id/load" android:title="@string/Load"></item>
-        <item android:id="@+id/quicksave" android:title="@string/QuickSave"></item>
+        <item android:id="@+id/quicksave" android:title="@string/QuickSave"
+          android:icon="@drawable/content_save"
+          android:showAsAction="ifRoom|withText" ></item>
         <item android:id="@+id/quickrestore" android:title="@string/QuickRestore"></item>
         <item android:id="@+id/cheats" android:title="@string/Cheats"></item>
-        <item android:id="@+id/settings" android:title="@string/Settings"></item>
+        <item android:id="@+id/settings" android:title="@string/Settings"
+          android:icon="@drawable/action_settings"
+          android:showAsAction="ifRoom|withText" ></item>
         <item android:id="@+id/savestate" android:title="@string/SaveState">
             <menu>
                 <item android:id="@+id/save1" android:title="1"/>
@@ -31,5 +35,4 @@
                 <item android:id="@+id/restore9" android:title="9"/>
             </menu>
         </item>
-        <item android:id="@+id/exit" android:title="@string/Exit"></item>
     </menu>

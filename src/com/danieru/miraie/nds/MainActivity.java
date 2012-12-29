@@ -203,18 +203,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	}
 	
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		pauseEmulation();
-		menu.findItem(R.id.cheats).setVisible(DeSmuME.romLoaded);
-		return true;
-	}
-	
-	@Override
-	public void onOptionsMenuClosed(Menu menu) {
-		runEmulation();
-	}
-	
-	@Override
 	public boolean onMenuItemSelected (int featureId, MenuItem item) {
 		switch(item.getItemId()) {
 		case R.id.load:
@@ -239,9 +227,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 			break;
 		case R.id.cheats:
 			startActivity(new Intent(this, Cheats.class));
-			break;
-		case R.id.exit:
-			finish();
 			break;
 		default:
 			return false;
@@ -315,8 +300,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 				}
 			}
 		}
+
 	}
-	
+		
 	
 	class NDSView extends SurfaceView implements Callback {
 

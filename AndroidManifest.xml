@@ -15,7 +15,7 @@
         
         <activity android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@android:style/Theme.Holo.NoActionBar">
+        	android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
         </activity>
         
         <activity android:name=".FileDialog" android:exported="false"
