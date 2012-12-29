@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_about"
+          android:icon="@drawable/action_about"
+          android:title="About"
+          android:showAsAction="ifRoom|withText" />
+    
     <item android:id="@+id/menu_settings"
           android:icon="@drawable/action_settings"
           android:title="Settings"
           android:showAsAction="ifRoom|withText" />
-    
 </menu>

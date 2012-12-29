@@ -1,43 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="35dip"  >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dip" >
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Load ROM" 
-        android:onClick="pickROM" />
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quick Settings" />
-
-    <LinearLayout
+        android:text="Play Now!"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="10dip"
+        android:textColor="@android:color/black" />
+    
+	<View
+	    android:layout_width="fill_parent"
+	    android:layout_height="2dip"
+	    android:background="@android:color/darker_gray"
+        android:layout_marginBottom="10dip" /> 
+        
+    <Button
+        android:id="@+id/button1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginBottom="5dip"
+        android:text="@string/Load" 
+        android:onClick="pickROM"/>
+        
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Play last Autosave" 
+        android:onClick="pickROM"/>
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sound" />
+    
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quick Settings"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="20dip"
+        android:textColor="@android:color/black" />
+    
+	<View
+	    android:layout_width="fill_parent"
+	    android:layout_height="2dip"
+	    android:background="@android:color/darker_gray"
+        android:layout_marginBottom="10dip" />
 
-    </LinearLayout>
+	<Switch
+	    android:id="@+id/switch1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/Sound" />
+	
+	<Switch
+	    android:id="@+id/switch2"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/vsync" /> 
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
         android:text="All Settings" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:drawableLeft="@drawable/action_settings_dark"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:onClick="gotoSettings" />
+    
+    
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Autosaves"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="20dip"
+        android:textColor="@android:color/black" />
+	<View
+	    android:layout_width="fill_parent"
+	    android:layout_height="2dip"
+	    android:background="@android:color/darker_gray"
+        android:layout_marginBottom="10dip"  />
 
+	<TextView
+	    android:id="@+id/textView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:text="No autosaves yet"
+	    android:textAppearance="?android:attr/textAppearanceSmall" />
+    
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
@@ -58,3 +125,4 @@
     </ScrollView>
 
 </LinearLayout>
+</ScrollView>
