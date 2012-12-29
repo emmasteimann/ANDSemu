@@ -6,6 +6,7 @@
 - write a readme, credit desmume, emozilla, and guy who made the nds image
 - in-app about page, show readme
 - file dialog should open the directory where we last loaded a rom from
+- use http://actionbarsherlock.com/ to support sub ics devices
 
 * low level *
 - integrate android-ndk-profiler
