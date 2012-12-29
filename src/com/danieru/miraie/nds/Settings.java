@@ -19,6 +19,8 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 
 import java.util.Locale;
 import java.util.Map.Entry;
+
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +32,8 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class Settings extends PreferenceActivity {
 
@@ -73,6 +77,26 @@ public class Settings extends PreferenceActivity {
 			
 		});
 		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    ActionBar actionBar = getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    return true;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected (int featureId, MenuItem item) {
+		switch(item.getItemId()) {
+        case android.R.id.home:
+            Intent intent = new Intent(this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+		default:
+			return false;
+		}
 	}
 	
 	static void applyLayoutDefaults(SharedPreferences prefs, boolean overwrite) {

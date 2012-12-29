@@ -23,10 +23,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TreeMap;
+
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -107,6 +113,26 @@ public class FileDialog extends ListActivity {
 			selectedFile = file;
 		}
 		getDir(startPath);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    ActionBar actionBar = getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    return true;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected (int featureId, MenuItem item) {
+		switch(item.getItemId()) {
+        case android.R.id.home:
+            Intent intent = new Intent(this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+		default:
+			return false;
+		}
 	}
 
 	private void getDir(String dirPath) {

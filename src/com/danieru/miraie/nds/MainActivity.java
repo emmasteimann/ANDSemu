@@ -18,6 +18,7 @@ package com.danieru.miraie.nds;
 */
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -199,12 +200,21 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.activity_main, menu);
+	    
+	    ActionBar actionBar = getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    return true;
 	}
 	
 	@Override
 	public boolean onMenuItemSelected (int featureId, MenuItem item) {
 		switch(item.getItemId()) {
+        case android.R.id.home:
+            // app icon in action bar clicked; go home
+            Intent intent = new Intent(this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
 		case R.id.load:
 			pickRom();
 			break;
