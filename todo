@@ -17,4 +17,4 @@
 
 * low level *
 - integrate android-ndk-profiler
-
+- merge nds4droid's dynarec when released
