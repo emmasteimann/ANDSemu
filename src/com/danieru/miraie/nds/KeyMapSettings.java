@@ -17,10 +17,10 @@ You should have received a copy of the GNU General Public License
 along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 
-public class KeyMapSettings extends PreferenceActivity {
+public class KeyMapSettings extends SherlockPreferenceActivity {
 	
 	@SuppressWarnings("deprecation")
 	@Override

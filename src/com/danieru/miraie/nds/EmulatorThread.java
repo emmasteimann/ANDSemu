@@ -114,6 +114,7 @@ class EmulatorThread extends Thread {
 				new File(path + "/Battery").mkdir();
 				new File(path + "/Cheats").mkdir();
 				new File(path + "/Games").mkdir();
+				new File(path + "/.data").mkdir();
 				
 				//clear any previously extracted ROMs
 				

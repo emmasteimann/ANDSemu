@@ -17,8 +17,9 @@ package com.danieru.miraie.nds;
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import com.actionbarsherlock.app.*;
+import com.actionbarsherlock.view.*;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -43,16 +44,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
 @SuppressLint("HandlerLeak")
-public class MainActivity extends Activity implements OnSharedPreferenceChangeListener {
+public class MainActivity extends SherlockActivity implements OnSharedPreferenceChangeListener {
 
 	static EmulatorThread coreThread;
 	static Controls controls;
@@ -198,10 +196,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		MenuInflater inflater = getSupportMenuInflater();
 	    inflater.inflate(R.menu.activity_main, menu);
 	    
-	    ActionBar actionBar = getActionBar();
+	    ActionBar actionBar = getSupportActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    return true;
 	}
