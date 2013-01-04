@@ -1,14 +1,12 @@
 package com.danieru.miraie.nds;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import com.actionbarsherlock.app.*;
+import com.actionbarsherlock.view.*;
 
-public class Home extends Activity {
+public class Home extends SherlockActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -18,7 +16,7 @@ public class Home extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
+	    MenuInflater inflater = getSupportMenuInflater();
 	    inflater.inflate(R.menu.home, menu);
 	    return true;
 	}

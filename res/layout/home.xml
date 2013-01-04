@@ -59,17 +59,17 @@
 	    android:background="@android:color/darker_gray"
         android:layout_marginBottom="10dip" />
 
-	<Switch
-	    android:id="@+id/switch1"
+	<CheckBox
+	    android:id="@+id/checkBox1"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:text="@string/Sound" />
-	
-	<Switch
-	    android:id="@+id/switch2"
+
+	<CheckBox
+	    android:id="@+id/checkBox1"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="@string/vsync" /> 
+	    android:text="@string/vsync" />
 
     <Button
         android:id="@+id/button2"

@@ -2,6 +2,9 @@ package com.danieru.miraie.nds;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.actionbarsherlock.app.SherlockActivity;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -18,7 +21,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
-public class ButtonLayoutEditor extends Activity {
+public class ButtonLayoutEditor extends SherlockActivity {
 	
 	final int[] buttonsToLoad = { Button.BUTTON_L, Button.BUTTON_R, Button.BUTTON_TOUCH, Button.BUTTON_SELECT,
 			Button.BUTTON_START, Button.BUTTON_DPAD, Button.BUTTON_ABXY };

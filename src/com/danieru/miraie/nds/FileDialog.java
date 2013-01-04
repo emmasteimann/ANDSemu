@@ -23,15 +23,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TreeMap;
-
-import android.app.ActionBar;
+import com.actionbarsherlock.view.*;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockListActivity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -41,7 +39,7 @@ import android.widget.TextView;
 
 //This originally came from http://code.google.com/p/android-file-dialog/
 
-public class FileDialog extends ListActivity {
+public class FileDialog extends SherlockListActivity {
 	
 	public static class SelectionMode {
 		public static final int MODE_CREATE = 0;
@@ -117,7 +115,7 @@ public class FileDialog extends ListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    ActionBar actionBar = getActionBar();
+	    ActionBar actionBar = getSupportActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    return true;
 	}

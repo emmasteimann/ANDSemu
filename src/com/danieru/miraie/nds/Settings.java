@@ -18,9 +18,9 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import java.util.Locale;
+import com.actionbarsherlock.app.*;
+import com.actionbarsherlock.view.*;
 import java.util.Map.Entry;
-
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,13 +29,10 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class Settings extends PreferenceActivity {
+public class Settings extends SherlockPreferenceActivity {
 
 	
 	static final int EDIT_LAYOUT_ID = 1337;
@@ -81,7 +78,7 @@ public class Settings extends PreferenceActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    ActionBar actionBar = getActionBar();
+	    ActionBar actionBar = getSupportActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 	    return true;
 	}

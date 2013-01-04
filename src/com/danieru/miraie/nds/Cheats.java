@@ -1,6 +1,6 @@
 package com.danieru.miraie.nds;
 
-import android.app.Activity;
+import com.actionbarsherlock.app.SherlockActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -17,7 +17,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class Cheats extends Activity {
+public class Cheats extends SherlockActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
