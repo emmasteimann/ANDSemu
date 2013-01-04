@@ -11,6 +11,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
@@ -31,6 +32,17 @@ public class ButtonLayoutEditor extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(view = new ButtonEditorView(this));
 		savedValues = savedInstanceState;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected (int featureId, MenuItem item) {
+		switch(item.getItemId()) {
+        case android.R.id.home:
+        	finish();
+            return true;
+		default:
+			return false;
+		}
 	}
 	
 	@Override

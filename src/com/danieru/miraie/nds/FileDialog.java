@@ -126,9 +126,7 @@ public class FileDialog extends ListActivity {
 	public boolean onMenuItemSelected (int featureId, MenuItem item) {
 		switch(item.getItemId()) {
         case android.R.id.home:
-            Intent intent = new Intent(this, Home.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+        	finish();
             return true;
 		default:
 			return false;

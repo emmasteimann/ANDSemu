@@ -23,6 +23,17 @@ public class Home extends Activity {
 	    return true;
 	}
 	
+	@Override
+	public boolean onMenuItemSelected (int featureId, MenuItem item) {
+		switch(item.getItemId()) {
+        case android.R.id.home:
+        	finish();
+            return true;
+		default:
+			return false;
+		}
+	}
+	
 	public void gotoSettings(View view) {
         Intent settingsIntent = new Intent(view.getContext(), Settings.class);
         startActivityForResult(settingsIntent, 0);

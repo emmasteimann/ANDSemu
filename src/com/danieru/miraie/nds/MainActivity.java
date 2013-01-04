@@ -206,14 +206,12 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	    return true;
 	}
 	
+	
 	@Override
 	public boolean onMenuItemSelected (int featureId, MenuItem item) {
 		switch(item.getItemId()) {
         case android.R.id.home:
-            // app icon in action bar clicked; go home
-            Intent intent = new Intent(this, Home.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+        	finish();
             return true;
 		case R.id.load:
 			pickRom();
@@ -238,7 +236,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		case R.id.cheats:
 			startActivity(new Intent(this, Cheats.class));
 			break;
-		default:
+				default:
 			return false;
 		}
 		runEmulation();
