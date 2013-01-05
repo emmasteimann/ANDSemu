@@ -17,15 +17,9 @@ You should have received a copy of the GNU General Public License
 along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import java.io.File;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
 class EmulatorThread extends Thread {
 	
@@ -97,34 +91,8 @@ class EmulatorThread extends Thread {
 				DeSmuME.context = activity;
 				DeSmuME.load();
 				
-				// Check external storage availability
-				if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-					Log.e(MainActivity.TAG, "External media must be mounted.");
-				}
-				
-				
-				final String defaultWorkingDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ANDSemu";
-				final String path = PreferenceManager.getDefaultSharedPreferences(activity).getString(Settings.DESMUME_PATH, defaultWorkingDir);
-				final File workingDir = new File(path);
-				final File tempDir = new File(path + "/Temp");
-				tempDir.mkdir();
-				DeSmuME.setWorkingDir(workingDir.getAbsolutePath(), tempDir.getAbsolutePath() + "/");
-				workingDir.mkdir();
-				new File(path + "/States").mkdir();
-				new File(path + "/Battery").mkdir();
-				new File(path + "/Cheats").mkdir();
-				new File(path + "/Games").mkdir();
-				new File(path + "/.data").mkdir();
-				
-				//clear any previously extracted ROMs
-				
-				final File[] cacheFiles = tempDir.listFiles();
-				if(cacheFiles != null) {
-					for(File cacheFile : cacheFiles) {
-						if(cacheFile.getAbsolutePath().toLowerCase(Locale.ENGLISH).endsWith(".nds"))
-							cacheFile.delete();
-					}
-				}
+				Filespace.prepFolders();
+				DeSmuME.setWorkingDir(Filespace.getMainFolder() + '/', Filespace.getTempFolder() + '/');
 				
 				DeSmuME.init();
 				DeSmuME.inited = true;

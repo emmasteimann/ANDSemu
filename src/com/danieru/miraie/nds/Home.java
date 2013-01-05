@@ -10,6 +10,8 @@ public class Home extends SherlockActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Filespace.prepFolders();
+		
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.home);
 	}
