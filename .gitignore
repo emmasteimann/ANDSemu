@@ -3,6 +3,9 @@
 libs/
 obj/
 
+# eclipse auto-generated yet useless
+lint.xml
+
 # -- Android ignores ----
 # built application files
 *.apk
