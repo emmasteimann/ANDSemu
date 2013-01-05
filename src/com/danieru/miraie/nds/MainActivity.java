@@ -39,7 +39,6 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
@@ -55,7 +54,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 	static EmulatorThread coreThread;
 	static Controls controls;
 	NDSView view;
-	static final String TAG = "nds4droid";
+	static final String TAG = "ANDSemu";
 	Dialog loadingDialog = null;
 
 	Handler msgHandler = new Handler() {
@@ -165,7 +164,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 	void pickRom() {
 		Intent i = new Intent(this, FileDialog.class);
 		i.setAction(Intent.ACTION_PICK);
-		i.putExtra(FileDialog.START_PATH, Environment.getExternalStorageDirectory().getAbsolutePath() + "/ANDSemu/Games/");
+		i.putExtra(FileDialog.START_PATH, Filespace.getGameFolder() + '/');
 		i.putExtra(FileDialog.FORMAT_FILTER, new String[] {".nds", ".zip", ".7z"});
 		startActivityForResult(i, PICK_ROM);
 	}

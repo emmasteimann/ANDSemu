@@ -1,6 +1,8 @@
 package com.danieru.miraie.nds;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -44,13 +46,20 @@ public class Cheats extends SherlockActivity {
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    ActionBar actionBar = getSupportActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    return true;
+	}
+	
+	@Override
 	public boolean onMenuItemSelected (int featureId, MenuItem item) {
 		switch(item.getItemId()) {
-        case android.R.id.home:
-        	finish();
-            return true;
-		default:
-			return false;
+	        case android.R.id.home:
+	        	finish();
+	            return true;
+			default:
+				return false;
 		}
 	}
 	

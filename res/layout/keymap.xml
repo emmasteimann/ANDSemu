@@ -9,7 +9,8 @@
     android:paddingTop="10dp"
     android:focusable="true"
     android:focusableInTouchMode="true">
-<TextView
+    
+	<TextView
         android:id="@+id/keymap_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
