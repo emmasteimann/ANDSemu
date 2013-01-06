@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/autosaveRowScreenshot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/star_big_on"
+        android:contentDescription="Screenshot of saved game" />
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical" >
+	
+		<TextView
+		    android:id="@+id/autosaveRowTitle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"
+		    android:text=""
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	    <TextView
+	        android:id="@+id/autosaveRowDate"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
+
+	<Button
+	    android:layout_width="wrap_content"
+	    android:id="@+id/autosaveRowPlay"
+	    android:layout_height="wrap_content"
+	    android:text="Play!" />
+
+</LinearLayout>
