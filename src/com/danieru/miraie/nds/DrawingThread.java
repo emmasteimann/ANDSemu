@@ -22,7 +22,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.danieru.miraie.nds.MainActivity.NDSView;
+import com.danieru.miraie.nds.EmulateActivity.NDSView;
 
 import android.graphics.Canvas;
 
@@ -98,7 +98,7 @@ class DrawingThread extends Thread{
 								canvas.drawBitmap(view.emuBitmapTouch, view.srcTouch, view.destTouch, null);
 							}
 							
-							MainActivity.controls.drawControls(canvas);
+							EmulateActivity.controls.drawControls(canvas);
 						}
 					}
 

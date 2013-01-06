@@ -20,7 +20,6 @@ package com.danieru.miraie.nds;
 import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.*;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -49,12 +48,11 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
 @SuppressLint("HandlerLeak")
-public class MainActivity extends SherlockActivity implements OnSharedPreferenceChangeListener {
+public class EmulateActivity extends SherlockActivity implements OnSharedPreferenceChangeListener {
 
 	static EmulatorThread coreThread;
 	static Controls controls;
 	NDSView view;
-	static final String TAG = "ANDSemu";
 	Dialog loadingDialog = null;
 	
 	/* Intent actions we accept */
@@ -87,7 +85,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 			case LOADING_START:
 				if(loadingDialog == null) {
 					final String loadingMsg = getResources().getString(R.string.loading);
-					loadingDialog = ProgressDialog.show(MainActivity.this, null, loadingMsg, true);
+					loadingDialog = ProgressDialog.show(EmulateActivity.this, null, loadingMsg, true);
 					break;
 				}
 				break;
@@ -98,7 +96,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 				}
 				break;
 			case ROM_ERROR:
-				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(EmulateActivity.this);
 				builder.setMessage(R.string.rom_error).setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
 					
 					@Override
@@ -131,7 +129,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 		controls = new Controls(view);
 
 		Settings.applyDefaults(this);
-		prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+		prefs = PreferenceManager.getDefaultSharedPreferences(EmulateActivity.this);
 		prefs.registerOnSharedPreferenceChangeListener(this);
 		loadJavaSettings(null);
 		
@@ -188,7 +186,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-	    inflater.inflate(R.menu.activity_main, menu);
+	    inflater.inflate(R.menu.emulate, menu);
 	    
 	    ActionBar actionBar = getSupportActionBar();
 	    actionBar.setDisplayHomeAsUpEnabled(true);
@@ -339,13 +337,13 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 			
 			if(showTouchMessage) {
 				prefs.edit().putBoolean(Settings.SHOW_TOUCH_MESSAGE, showTouchMessage = false).apply();
-				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(EmulateActivity.this);
 				builder.setPositiveButton(R.string.OK, null).setMessage(R.string.touchnotify).create().show();
 			}
 			
 			if(showSoundMessage) {
 				prefs.edit().putBoolean(Settings.SHOW_SOUND_MESSAGE, showSoundMessage = false).apply();
-				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(EmulateActivity.this);
 				builder.setMessage(R.string.soundmsg).setPositiveButton(R.string.yes, new Dialog.OnClickListener() {
 
 					@Override
@@ -394,7 +392,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 				final boolean is565 = newPixelFormat == PixelFormat.RGB_565 && !hasScreenFilter;
 				landscape = newWidth > newHeight;
 				controls.setView(this);
-				controls.loadControls(MainActivity.this, newWidth, newHeight, is565, landscape);
+				controls.loadControls(EmulateActivity.this, newWidth, newHeight, is565, landscape);
 				
 				forceTouchScreen = !prefs.getBoolean("Controls." + (landscape ? "Landscape." : "Portrait.") + "Draw", false);
 				

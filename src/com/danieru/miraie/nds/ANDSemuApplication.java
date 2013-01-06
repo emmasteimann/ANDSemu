@@ -20,6 +20,7 @@ package com.danieru.miraie.nds;
 import android.app.Application;
 
 public class ANDSemuApplication extends Application {
+	static final String TAG = "ANDSemu";
 	
 	@Override
 	public void onCreate() {

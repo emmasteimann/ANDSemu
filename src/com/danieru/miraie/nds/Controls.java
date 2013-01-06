@@ -18,7 +18,7 @@ along with the this software.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import java.util.ArrayList;
-import com.danieru.miraie.nds.MainActivity.NDSView;
+import com.danieru.miraie.nds.EmulateActivity.NDSView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;

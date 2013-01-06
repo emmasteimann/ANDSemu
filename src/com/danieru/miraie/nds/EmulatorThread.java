@@ -23,12 +23,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 class EmulatorThread extends Thread {
 	
-	public EmulatorThread(MainActivity activity) {
+	public EmulatorThread(EmulateActivity activity) {
 		super("EmulatorThread");
 		this.activity = activity;
 	}
 	
-	public void setCurrentActivity(MainActivity activity) {
+	public void setCurrentActivity(EmulateActivity activity) {
 		this.activity = activity;
 	}
 	
@@ -79,7 +79,7 @@ class EmulatorThread extends Thread {
 	
 	public Lock inFrameLock = new ReentrantLock();
 	int fps = 1;
-	MainActivity activity = null;
+	EmulateActivity activity = null;
 	long frameCounter = 0;
 	
 	@Override
@@ -98,16 +98,16 @@ class EmulatorThread extends Thread {
 				DeSmuME.inited = true;
 			}
 			if(pendingRomLoad != null) {
-				activity.msgHandler.sendEmptyMessage(MainActivity.LOADING_START);
+				activity.msgHandler.sendEmptyMessage(EmulateActivity.LOADING_START);
 				if(DeSmuME.romLoaded)
 					DeSmuME.closeRom();
 				if(!DeSmuME.loadRom(pendingRomLoad)) {
-					activity.msgHandler.sendEmptyMessage(MainActivity.LOADING_END);
-					activity.msgHandler.sendEmptyMessage(MainActivity.ROM_ERROR);
+					activity.msgHandler.sendEmptyMessage(EmulateActivity.LOADING_END);
+					activity.msgHandler.sendEmptyMessage(EmulateActivity.ROM_ERROR);
 					DeSmuME.romLoaded = false;
 				}
 				else {
-					activity.msgHandler.sendEmptyMessage(MainActivity.LOADING_END);
+					activity.msgHandler.sendEmptyMessage(EmulateActivity.LOADING_END);
 					DeSmuME.romLoaded = true;
 					setPause(false);
 				}
@@ -135,7 +135,7 @@ class EmulatorThread extends Thread {
 				inFrameLock.unlock();
 				fps = DeSmuME.runOther();
 
-				activity.msgHandler.sendEmptyMessage(MainActivity.DRAW_SCREEN);
+				activity.msgHandler.sendEmptyMessage(EmulateActivity.DRAW_SCREEN);
 		
 				
 			} 

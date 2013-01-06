@@ -43,15 +43,15 @@ class DeSmuME {
 		switch(cpuType) {
 		case CPUTYPE_NEON:
 			System.loadLibrary("desmumeneon");
-			Log.i(MainActivity.TAG, "Using NEON enhanced native library");
+			Log.i(ANDSemuApplication.TAG, "Using NEON enhanced native library");
 			break;
 		case CPUTYPE_V7:
 			System.loadLibrary("desmumev7");
-			Log.i(MainActivity.TAG, "Using ARMv7 native library");
+			Log.i(ANDSemuApplication.TAG, "Using ARMv7 native library");
 			break;
 		default:
 			System.loadLibrary("desmumecompat");
-			Log.i(MainActivity.TAG, "Using compatibility native library");
+			Log.i(ANDSemuApplication.TAG, "Using compatibility native library");
 			break;
 		}
 		loaded = true;

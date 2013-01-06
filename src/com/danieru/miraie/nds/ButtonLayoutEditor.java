@@ -105,7 +105,7 @@ public class ButtonLayoutEditor extends SherlockActivity {
 			public boolean onScale(ScaleGestureDetector detector) {
 				if(scaling == null)
 					return false;
-				//Log.i(MainActivity.TAG, "Scale factor: " + detector.getScaleFactor());
+				//Log.i(EmulateActivity.TAG, "Scale factor: " + detector.getScaleFactor());
 				
 				final int scaleX = (int) (scaling.position.width() * (detector.getScaleFactor() - 1.0f));
 				final int scaleY = (int) (scaling.position.height() * (detector.getScaleFactor() - 1.0f));
