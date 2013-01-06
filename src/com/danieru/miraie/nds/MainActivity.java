@@ -84,9 +84,6 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 					view.drawingThread.drawEventLock.unlock();
 				}
 				break;
-			case PICK_ROM:
-				pickRom();
-				break;
 			case LOADING_START:
 				if(loadingDialog == null) {
 					final String loadingMsg = getResources().getString(R.string.loading);
@@ -107,14 +104,14 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
 						arg0.dismiss();
-						pickRom();
+						finish();
 					}
 				}).setOnCancelListener(new OnCancelListener() {
 
 					@Override
 					public void onCancel(DialogInterface arg0) {
 						arg0.dismiss();
-						pickRom();
+						finish();
 					}
 					
 				});
@@ -147,8 +144,7 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 		} else if (task.getAction() == IntentActions.LOADWITHAUTOSAVE) {
 			
 		} else if (task.getAction() == IntentActions.RESUME) {
-			if(!DeSmuME.inited) 
-				pickRom();
+			runEmulation();
 		}
 	}
 	
@@ -175,26 +171,6 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 		if(coreThread != null) {
 			coreThread.setPause(true);
 		}
-	}
-	
-	void pickRom() {
-		Intent i = new Intent(this, FileDialog.class);
-		i.setAction(Intent.ACTION_PICK);
-		i.putExtra(FileDialog.START_PATH, Filespace.getGameFolder() + '/');
-		i.putExtra(FileDialog.FORMAT_FILTER, new String[] {".nds", ".zip", ".7z"});
-		startActivityForResult(i, PICK_ROM);
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode != PICK_ROM || resultCode != Activity.RESULT_OK)
-			return;
-		String romPath = data.getStringExtra(FileDialog.RESULT_PATH);
-		if(romPath != null) {
-			runEmulation();
-			coreThread.loadRom(romPath);
-		}
-			
 	}
 	
 	@Override
@@ -226,9 +202,6 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
         case android.R.id.home:
         	finish();
             return true;
-		case R.id.load:
-			pickRom();
-			break;
 		case R.id.quicksave:
 			saveState(0);
 			break;
