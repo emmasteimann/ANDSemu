@@ -56,6 +56,19 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 	NDSView view;
 	static final String TAG = "ANDSemu";
 	Dialog loadingDialog = null;
+	
+	/* Intent actions we accept */
+	class IntentActions {
+		public static final String RESUME = "resume";
+		public static final String LOAD = "load_rom";
+		public static final String LOADWITHAUTOSAVE = "load_rom_with_autosave";
+	}
+	
+	public static final int DRAW_SCREEN = 1337;
+	public static final int PICK_ROM = 1338;
+	public static final int LOADING_START = 1339;
+	public static final int LOADING_END = 1340;
+	public static final int ROM_ERROR = 1341;
 
 	Handler msgHandler = new Handler() {
 		
@@ -111,12 +124,6 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 		
 	};
 	
-	public static final int DRAW_SCREEN = 1337;
-	public static final int PICK_ROM = 1338;
-	public static final int LOADING_START = 1339;
-	public static final int LOADING_END = 1340;
-	public static final int ROM_ERROR = 1341;
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -131,9 +138,18 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 		prefs.registerOnSharedPreferenceChangeListener(this);
 		loadJavaSettings(null);
 		
-		if(!DeSmuME.inited) 
-			pickRom();
-		
+		Intent task = getIntent();
+		if (task.getAction() == IntentActions.LOAD) {
+			String romPath = task.getDataString();
+			runEmulation();
+			coreThread.loadRom(romPath);
+			
+		} else if (task.getAction() == IntentActions.LOADWITHAUTOSAVE) {
+			
+		} else if (task.getAction() == IntentActions.RESUME) {
+			if(!DeSmuME.inited) 
+				pickRom();
+		}
 	}
 	
 	@Override
@@ -387,11 +403,19 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 		
 		
 		void resize(int newWidth, int newHeight, int newPixelFormat) {
-			
 			synchronized(view.surfaceHolder) {
 				sourceWidth = DeSmuME.getNativeWidth();
 				sourceHeight = DeSmuME.getNativeHeight();
 				resized = true;
+				doForceResize = false;
+				
+				//cheap hack to avoid a race condition
+				if (sourceHeight == 0 || sourceWidth == 0) {
+					sourceHeight = 2;
+					sourceWidth = 2;
+					resized = false;
+					doForceResize = true;
+				}
 				
 				final boolean hasScreenFilter = DeSmuME.getSettingInt(Settings.SCREEN_FILTER, 0) != 0;
 				final boolean is565 = newPixelFormat == PixelFormat.RGB_565 && !hasScreenFilter;
@@ -431,7 +455,6 @@ public class MainActivity extends SherlockActivity implements OnSharedPreference
 				height = newHeight;
 				pixelFormat = newPixelFormat;
 				sized = true;
-				doForceResize = false;
 			}
 		}
 

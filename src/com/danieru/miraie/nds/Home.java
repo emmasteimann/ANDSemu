@@ -1,10 +1,12 @@
 package com.danieru.miraie.nds;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.*;
+import com.danieru.miraie.nds.MainActivity.IntentActions;
 
 public class Home extends SherlockActivity {
 
@@ -28,9 +30,19 @@ public class Home extends SherlockActivity {
         startActivityForResult(settingsIntent, 0);
 	}
 	
-	public void pickROM(View view) {
-        Intent playIntent = new Intent(view.getContext(), MainActivity.class);
-        startActivityForResult(playIntent, 0);
+	public void pickRom(View view) {
+		Intent i = new Intent(this, FileDialog.class);
+		i.setAction(Intent.ACTION_PICK);
+		i.putExtra(FileDialog.START_PATH, Filespace.getGameFolder() + '/');
+		i.putExtra(FileDialog.FORMAT_FILTER, new String[] {".nds", ".zip", ".7z"});
+		startActivityForResult(i, MainActivity.PICK_ROM);
+	}
+	
+	public void playRom(Uri romPath) {
+        Intent playIntent = new Intent(this, MainActivity.class);
+        playIntent.setAction(MainActivity.IntentActions.LOAD);
+        playIntent.setData(romPath);
+        startActivity(playIntent);
 	}
 	
 	@Override
@@ -43,5 +55,13 @@ public class Home extends SherlockActivity {
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == MainActivity.PICK_ROM) {
+		     if(resultCode == RESULT_OK) {
+		    	 playRom(Uri.parse(data.getStringExtra(FileDialog.RESULT_PATH)));
+		     }
+		}
 	}
 }

@@ -27,20 +27,21 @@
         
     <Button
         android:id="@+id/button1"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginBottom="5dip"
-        android:text="@string/Load" 
-        android:onClick="pickROM"/>
+        android:text="Play last Autosave" 
+        android:onClick="loadAutosave"/>
         
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Play last Autosave" 
-        android:onClick="pickROM"/>
+        android:layout_marginBottom="5dip"
+        android:text="@string/Load" 
+        android:onClick="pickRom"/>
 
     
     

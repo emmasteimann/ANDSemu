@@ -134,9 +134,6 @@ class EmulatorThread extends Thread {
 				DeSmuME.runCore();
 				inFrameLock.unlock();
 				fps = DeSmuME.runOther();
-				
-				
-				//Log.i(MainActivity.TAG, String.format("Frame: %d FPS", fps));
 
 				activity.msgHandler.sendEmptyMessage(MainActivity.DRAW_SCREEN);
 		

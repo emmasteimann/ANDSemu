@@ -63,7 +63,7 @@ class DrawingThread extends Thread{
 				synchronized(view.surfaceHolder) {
 					
 					if(canvas != null) {
-						if(!DeSmuME.inited)
+						if(!DeSmuME.inited || !DeSmuME.romLoaded)
 							continue;
 						
 						if(view.doForceResize)
@@ -77,13 +77,15 @@ class DrawingThread extends Thread{
 								DeSmuME.copyMasterBuffer();
 							coreThread.inFrameLock.unlock();
 						}
-						else
+						else {
 							DeSmuME.copyMasterBuffer();
+						}
+						
 						if(DO_DIRECT_DRAW)
 							DeSmuME.drawToSurface(view.surfaceHolder.getSurface());
-						else {
+						else
 							DeSmuME.draw(view.emuBitmapMain, view.emuBitmapTouch, view.landscape && view.dontRotate);
-						}
+						
 						
 						if(!DO_DIRECT_DRAW) {
 
