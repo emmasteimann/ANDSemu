@@ -19,6 +19,7 @@
                 <item android:id="@+id/save7" android:title="7"/>
                 <item android:id="@+id/save8" android:title="8"/>
                 <item android:id="@+id/save9" android:title="9"/>
+                <item android:id="@+id/save10" android:title="10"/>
             </menu>
         </item>
         <item android:id="@+id/restorestate" android:title="@string/RestoreState">
@@ -32,6 +33,7 @@
                 <item android:id="@+id/restore7" android:title="7"/>
                 <item android:id="@+id/restore8" android:title="8"/>
                 <item android:id="@+id/restore9" android:title="9"/>
+                <item android:id="@+id/restore10" android:title="10"/>
             </menu>
         </item>
     </menu>

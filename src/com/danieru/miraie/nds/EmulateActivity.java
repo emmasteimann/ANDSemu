@@ -208,11 +208,11 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 			restoreState(0);
 			break;
 		case R.id.restore1: case R.id.restore2: case R.id.restore3: case R.id.restore4: case R.id.restore5:
-		case R.id.restore6: case R.id.restore7: case R.id.restore8: case R.id.restore9:
+		case R.id.restore6: case R.id.restore7: case R.id.restore8: case R.id.restore9: case R.id.restore10:
 			restoreState(Integer.valueOf(item.getTitle().toString()));
 			break;
 		case R.id.save1: case R.id.save2: case R.id.save3: case R.id.save4: case R.id.save5:
-		case R.id.save6: case R.id.save7: case R.id.save8: case R.id.save9:
+		case R.id.save6: case R.id.save7: case R.id.save8: case R.id.save9: case R.id.save10:
 			saveState(Integer.valueOf(item.getTitle().toString()));
 			break;
 		case R.id.settings:

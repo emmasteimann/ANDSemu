@@ -638,8 +638,13 @@ void savestate_slot(int num)
 
    if (savestate_save(filename))
    {
-	   osd->setLineColor(255, 255, 255);
-	   osd->addLine("Saved to %i slot", num);
+	   // ANDROID
+		// slot 11 is the autosave slot
+		// do not announce such saves
+		if (num != 11) {
+		   osd->setLineColor(255, 255, 255);
+		   osd->addLine("Saved to %i slot", num);
+		}
    }
    else
    {

@@ -7,6 +7,7 @@
 - thank you note at bottom of home screen
 - check if games are in Games folder else open sdcard
 - hardcoded strings moved to strings.xml
+- fix squashed controls in landscape
 
 
 * low level *
