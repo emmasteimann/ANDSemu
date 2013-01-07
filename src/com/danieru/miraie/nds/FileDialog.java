@@ -176,9 +176,9 @@ public class FileDialog extends SherlockListActivity {
 
 		if (!currentPath.equals(ROOT)) {
 
-			item.add(ROOT);
-			addItem(ROOT, R.drawable.folder);
-			path.add(ROOT);
+			//item.add(ROOT);
+			//addItem(ROOT, R.drawable.folder);
+			//path.add(ROOT);
 
 			item.add("../");
 			addItem("../", R.drawable.updirectory);

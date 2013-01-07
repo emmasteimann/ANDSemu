@@ -29,7 +29,8 @@
 		android:layout_above="@+id/fdLinearLayoutList">
 		
 		<TextView android:id="@+id/path" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+	        android:layout_marginBottom="8dip" />
 		
 		<ListView android:id="@android:id/list" android:layout_width="fill_parent"
 			android:layout_height="fill_parent" />
