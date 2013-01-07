@@ -40,6 +40,7 @@ class EmulatorThread extends Thread {
 	String pendingRomLoad = null;
 	Integer pending3DChange = null;
 	Integer pendingSoundChange = null;
+	boolean pendingAutosave = false;
 	
 	public void loadRom(String path) {
 		pendingRomLoad = path;
@@ -73,6 +74,10 @@ class EmulatorThread extends Thread {
 		synchronized(dormant) {
 			dormant.notifyAll();
 		}
+	}
+	
+	public void sheduleAutosave() {
+		pendingAutosave = true;
 	}
 	
 	Object dormant = new Object();
@@ -120,6 +125,10 @@ class EmulatorThread extends Thread {
 			if(pendingSoundChange != null) {
 				DeSmuME.changeSound(pendingSoundChange.intValue());
 				pendingSoundChange = null;
+			}
+			if(pendingAutosave) {
+				DeSmuME.saveState(9);
+				pendingAutosave = false;
 			}
 			
 			if(!paused.get()) {

@@ -181,6 +181,7 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 	public void onPause() {
 		super.onPause();
 		pauseEmulation();
+		coreThread.sheduleAutosave();
 	}
 	
 	@Override
