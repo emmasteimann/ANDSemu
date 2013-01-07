@@ -69,17 +69,43 @@
 	    android:background="@android:color/darker_gray"
         android:layout_marginBottom="10dip" />
 
-	<CheckBox
-	    android:id="@+id/checkBox1"
+	<RelativeLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/Sound" />
+	    android:layout_height="wrap_content" >
 
-	<CheckBox
-	    android:id="@+id/checkBox1"
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+		    android:text="@string/Sound"
+        	android:layout_alignParentLeft="true"
+        	android:layout_centerVertical="true"
+	        android:layout_marginTop="20dip" />
+		<CheckBox
+		    android:id="@+id/soundToggle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+        	android:layout_alignParentRight="true"
+	        android:onClick="setSound" />
+	</RelativeLayout>
+
+	<RelativeLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/vsync" />
+	    android:layout_height="wrap_content" >
+
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+        	android:layout_alignParentLeft="true"
+        	android:layout_centerVertical="true"
+	        android:layout_marginTop="20dip"
+	    	android:text="@string/vsync" />
+		<CheckBox
+		    android:id="@+id/vsyncToggle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+        	android:layout_alignParentRight="true"
+        	android:onClick="setVsync" />
+	</RelativeLayout>
 
     <Button
         android:id="@+id/button2"

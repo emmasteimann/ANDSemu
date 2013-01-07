@@ -1,20 +1,32 @@
 package com.danieru.miraie.nds;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.CheckBox;
+
 import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.*;
 
-public class HomeActivity extends SherlockActivity {
+public class HomeActivity extends SherlockActivity implements OnSharedPreferenceChangeListener {
 
+	SharedPreferences prefs = null;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Filespace.prepFolders();
+
+		Settings.applyDefaults(this);
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		prefs.registerOnSharedPreferenceChangeListener(this);
 		
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.home);
+	    updateQuickSettings(prefs);
 	}
 	
 	@Override
@@ -75,5 +87,30 @@ public class HomeActivity extends SherlockActivity {
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+
+	/* Quick Settings */
+	public void setSound(View view) {
+		SharedPreferences.Editor editor = prefs.edit();
+	    editor.putBoolean(Settings.ENABLE_SOUND, ((CheckBox) view).isChecked());
+	    editor.commit();
+	}
+	
+	public void setVsync(View view) {
+		SharedPreferences.Editor editor = prefs.edit();
+	    editor.putBoolean(Settings.VSYNC, ((CheckBox) view).isChecked());
+	    editor.commit();
+	}
+	
+	public void updateQuickSettings(SharedPreferences prefs) {
+		CheckBox vsync = (CheckBox) findViewById(R.id.vsyncToggle);
+		vsync.setChecked(prefs.getBoolean(Settings.VSYNC, true));
+		CheckBox sound = (CheckBox) findViewById(R.id.soundToggle);
+		sound.setChecked(prefs.getBoolean(Settings.ENABLE_SOUND, true));
+	}
+	
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,String key) {
+		updateQuickSettings(prefs);
 	}
 }

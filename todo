@@ -5,12 +5,8 @@
 - in-app about page, show readme
 - file dialog should open the directory where we last loaded a rom from
 - thank you note at bottom of home screen
-- Resume game button to resume running game
-- load rom home button should always bring up file dialog
-- supersize Resume game button, hide when no game is playing
-- switch order of activities: home should get rom from filedialog then pass it to emu
-- hookup quick settings to real settings
 - check if games are in Games folder else open sdcard
+- hardcoded strings moved to strings.xml
 
 
 * low level *
