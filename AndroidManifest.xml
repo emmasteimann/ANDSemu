@@ -18,7 +18,7 @@
     android:name="ANDSemuApplication">
         
         <activity android:name="com.danieru.miraie.nds.EmulateActivity"
-    		android:configChanges="keyboardHidden|orientation|screenSize"
+    		android:configChanges="keyboardHidden"
             android:label="@string/title_activity_main" >
         </activity>
         

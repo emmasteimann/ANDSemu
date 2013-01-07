@@ -134,16 +134,22 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		loadJavaSettings(null);
 		
 		Intent task = getIntent();
-		if (task.getAction() == IntentActions.LOAD) {
+		if (task.getAction() == IntentActions.RESUME) {
+			runEmulation();
+			
+		} else if (task.getAction() == IntentActions.LOAD) {
 			String romPath = task.getDataString();
 			runEmulation();
 			coreThread.loadRom(romPath);
 			
 		} else if (task.getAction() == IntentActions.LOADWITHAUTOSAVE) {
 			
-		} else if (task.getAction() == IntentActions.RESUME) {
-			runEmulation();
 		}
+		
+		/* On screen rotation our onCreate will be called again
+		 * with this intent. We then want to resume.
+		 */
+		task.setAction(EmulateActivity.IntentActions.RESUME);
 	}
 	
 	@Override
@@ -163,10 +169,13 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		coreThread.setPause(!DeSmuME.romLoaded);
 		if(created)
 			coreThread.start();
+		else
+			coreThread.changeSound(DeSmuME.getSettingInt(Settings.ENABLE_SOUND, 0));
 	}
 	
 	void pauseEmulation() {
 		if(coreThread != null) {
+			coreThread.changeSound(0);
 			coreThread.setPause(true);
 		}
 	}
