@@ -63,7 +63,7 @@ class DrawingThread extends Thread{
 				synchronized(view.surfaceHolder) {
 					
 					if(canvas != null) {
-						if(!DeSmuME.inited || !DeSmuME.romLoaded)
+						if(!DeSmuME.inited)
 							continue;
 						
 						if(view.doForceResize)
