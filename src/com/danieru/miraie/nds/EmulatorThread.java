@@ -21,6 +21,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import android.util.Log;
+
 class EmulatorThread extends Thread {
 	
 	public EmulatorThread(EmulateActivity activity) {
@@ -127,6 +129,7 @@ class EmulatorThread extends Thread {
 				pendingSoundChange = null;
 			}
 			if(pendingAutosave) {
+				Log.i(ANDSemuApplication.TAG, "Autosaving!");
 				DeSmuME.saveState(11);
 				pendingAutosave = false;
 			}

@@ -30,7 +30,7 @@ bool GetPrivateProfileBool(JNIEnv* env, const char* lpAppName, const char* lpKey
 extern "C" {
 #endif
 
-#define APPNAME "nds4droid"
+#define APPNAME "ANDSemu"
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, APPNAME, __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, APPNAME, __VA_ARGS__))
