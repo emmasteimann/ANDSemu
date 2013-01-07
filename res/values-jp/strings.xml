@@ -1,0 +1,187 @@
+<resources>
+    
+	<!-- Release 1 -->
+    <string name="app_name">"ANDSemu"</string>
+    <string name="title_activity_main">"ANDSemu"</string>
+	<string name="rom_error">"このROMのロード中にエラーが発生しました：（"</string>
+	<string name="OK">"OK"</string>
+	<string name="location">"位置"</string>
+    <string name="cant_read_folder">"フォルダが読められない"</string>
+    <string name="cancel">"キャンセル"</string>
+    <string name="no_data">"データなし"</string>
+    <string name="Load">"ROMを読み込む"</string>
+    <string name="QuickSave">"クイック保存"</string>
+    <string name="QuickRestore">"クイックリストア"</string>
+    <string name="SaveState">"状態を保存"</string>
+    <string name="RestoreState">"状態を復元"</string>
+    <string name="Settings">"設定"</string>
+    
+    <!-- Release 2 -->
+    <string name="touchnotify">"タッチモードとテンキーモードを切り替えるには、上部に \"タッチ\"ボタンをタップ"</string>
+    <string name="frameskip">"フレームスキップ"</string>
+    <string name="frameskipdesc">"エミュレート時に何フレームスキップする。遅いエミュレーションが実時間に一致させるのに役立ちます。"</string>
+    <string name="vsync">"VSync"</string>
+    <string name="vsyncdesc">"フレームのみの間で画面に描画します。エミュレーションを遅くすることができますが、オフにすると、グラフィカルなグリッチが発生することがあります。"</string>
+    <string name="fps">"FPSを表示"</string>
+    <string name="fpsdesc">"画面上にFPSを描く。"</string>
+    
+    <!-- Release 3 -->
+    <string name="loading">"読み込み中"</string>    
+    
+    <!-- Release 4 -->
+    <string name="filter">"スクリーンフィルター"</string>
+    <string name="filterdesc">"ときにニンテンドーDSの解像度から、画面にアップスケーリングに使用するフィルタ。より高品質なフィルタはパフォーマンスが低下する場合があります。"</string>
+    
+    <!-- Release 5 -->
+    <string name="threedrenderer">"3Dレンダラ"</string>
+    <string name="threedrendererdesc">"どの使用する3D描画エンジン。"</string>
+    <string-array name="threed_options">
+        <item>"なし"</item>
+        <item>"OpenGL"</item>
+        <item>"ソフトウェア"</item>
+    </string-array>
+    <string name="sound">"サウンドを有効にする"</string>
+    <string name="sounddesc">"処理とオーディオの再生を有効にします。無効にするとパフォーマンスを向上させることができます。"</string>
+    <string name="soundmsg">"あなたは音を有効にしますか？これは、3から5までのFPS、パフォーマンスの低下を引き起こす可能性があります。"</string>
+    <string name="yes">"Yes"</string>
+    <string name="no">"No"</string>
+    
+    <!-- Release 8 -->
+    <string name="Display">"表示"</string>
+    <string name="Controls">"コントロール"</string>
+    <string name="EditLayout">"編集コントロールのレイアウト"</string>
+    <string name="EditLayoutDesc">"タッチコントロールを画面上に配置される場所を編集します。"</string>
+    <string name="UseTouchPort">"肖像のタッチボタン"</string>
+    <string name="UseTouchPortDesc">"ポートレートモードでは、画面上のタッチボタンを使用します。"</string>
+    <string name="UseTouchLand">"風景タッチボタン"</string>
+    <string name="UseTouchLandDesc">"風景モードでは、画面上のタッチボタンを使用します。"</string>
+    <string name="ResetLayout">"コントロールのレイアウトをリセットする"</string>
+    <string name="ResetLayoutDesc">"デフォルトにタッチコントロールのレイアウトをリセットします。"</string>
+    <string name="Sound">"サウンド"</string>
+    <string name="LCDSwap">"液晶ディスプレイを交換します"</string>
+    <string name="LCDSwapDesc">"メイン液晶とタッチの位置を入れ替えることを確認します。"</string>
+    <string name="ButtonTrans">"ボタンの透明性"</string>
+    <string name="ButtonTransDesc">"画面上のタッチボタンはどのように透明でなければならない"</string>
+    <string name="Haptic">"入力時バイブレーション"</string>
+    <string name="HapticDesc">"デバイスでサポートされている場合、ボタン押下で触覚フィードバックを提供します。"</string>
+    <string name="KeymapDialogDesc">"このボタンにマッピングするには、キーを押し"</string>
+    <string name="KeymapValuePreface">"現在にマッピング"</string>
+    <string name="EditKeymap">"キーマッピングを編集"</string>
+    <string name="EditKeymapDesc">"ハードウェアキーからDSのボタンにマッピングを編集します。"</string>
+    <string name="Up">"--up"</string>
+    <string name="Down">"Down"</string>
+    <string name="Left">"Left"</string>
+    <string name="Right">"Right"</string>
+    <string name="A">"A"</string>
+    <string name="B">"B"</string>
+    <string name="X">"X"</string>
+    <string name="Y">"Y"</string>
+    <string name="Select">"開始"</string>
+    <string name="Start">"選択"</string>
+    <string name="L">"L"</string>
+    <string name="R">"R"</string>
+    <string name="Touch">"touch"</string>
+    
+    <!-- Release 10 -->
+    <string name="DontRotateLCDs">"液晶ディスプレイを回転させないでください"</string>
+    <string name="DontRotateLCDsDesc">"ランドスケープモードでは、ゲームの液晶ディスプレイを回転させないでください。横向きに開催されたDSでプレイすることを意図していたゲームのためにこれを使用してください。"</string>
+    <string name="Language">"言語"</string>
+    <string name="LanguageDesc">"システムの言語です。多言語ROMはこの設定を使用します。変更は次のROMのロードに適用されます。"</string>
+    <string name="Gameplay">"ゲームプレイ"</string>
+    
+    <!-- Release 11 -->
+    <string name="AddCheat">"新しいアクションリプレイのチートを追加"</string>
+    <string name="Cheats">"攻略"</string>
+    <string name="Exit">"終了"</string>
+    <string name="Edit">"編集"</string>
+    <string name="Delete">"削除"</string>
+    <string name="Description">"説明"</string>
+    
+    <!-- Release 12 -->
+    <string name="EnableMicrophone">"マイクを有効にする"</string>
+    <string name="EnableMicrophoneDesc">"DSのマイクとしてお使いのデバイスのマイクを使用してください。"</string>
+    <string name="AlwaysTouch">"いつもタッチを可能にする"</string>
+    <string name="AlwaysTouchDesc">"いつもしないときは、タッチモードでも、DSのタッチスクリーンを処理します。同時にコントロールとタッチスクリーンを使用して必要なゲームのために。"</string>
+    
+    <!-- Release 14 -->
+    <string name="CheatCode">"コード"</string>
+    <string name="CurrentValue">"現在値"</string>
+    <string name="ImageOfFolder">"ファイルのイメージ"</string>
+    
+    
+    <!-- Do not translate -->
+    <string-array name="filternames">
+        <item>"Normal"</item>
+		<item>"HQ2x"</item>
+		<item>"2XSaI"</item>
+		<item>"Super2XSaI"</item>
+		<item>"SuperEagle"</item>
+		<item>"Scanline"</item>
+		<item>"Bilinear"</item>
+		<item>"Nearest 2X"</item>
+		<item>"HQ2xS"</item>
+		<item>"LQ2x"</item>
+		<item>"LQ2xS"</item>
+        <item>"EPX"</item>
+        <item>"Nearest+ 1.5X"</item>
+        <item>"Nearest 1.5X"</item>
+        <item>"EPX +"</item>
+        <item>"EPX 1.5X"</item>
+        <item>"EPX + 1.5X"</item>
+        <item>"HQ4x"</item>
+    </string-array>
+        <string-array name="zerothroughnine">
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"４"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+        <item>"7"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+    </string-array>
+    <string-array name="zerothroughseventeen">
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+        <item>"7"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+        <item>"10"</item>
+        <item>"11"</item>
+        <item>"12"</item>
+        <item>"13"</item>
+        <item>"14"</item>
+        <item>"15"</item>
+        <item>"16"</item>
+        <item>"17"</item>
+    </string-array>
+   	<string-array name="zerothroughtwo">
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+    </string-array>
+    <string-array name="languages">
+        <item>"日本語"</item>
+        <item>"English"</item>
+        <item>"Français"</item>
+        <item>"Deutsch"</item>
+        <item>"Italiano"</item>
+        <item>"Español"</item>
+    </string-array>
+    <string-array name="zerothroughfive">
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4 "</item>
+        <item>"5"</item>
+    </string-array>
+    
+</resources>
