@@ -23,10 +23,19 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="2dip"
 	    android:background="@android:color/darker_gray"
-        android:layout_marginBottom="10dip" /> 
+        android:layout_marginBottom="10dip" />
         
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/resumeGame"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Resume Game" 
+        android:onClick="resumeGame"/>
+        
+    <Button
+        android:id="@+id/loadAutosave"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +44,7 @@
         android:onClick="loadAutosave"/>
         
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/loadNewGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
