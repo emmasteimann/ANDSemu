@@ -233,7 +233,7 @@ public class FileDialog extends SherlockListActivity {
 		}
 
 		for (String file : filesMap.tailMap("").values()) {
-			addItem(file, R.drawable.file);
+			addItem(file, R.drawable.dscartridge);
 		}
 
 		fileList.notifyDataSetChanged();
