@@ -95,12 +95,13 @@ public class HomeActivity extends SherlockActivity implements OnSharedPreference
 	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	        	builder.setMessage(R.string.about)
 	               .setPositiveButton(R.string.thankyou, new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {
-	                   // User clicked OK
-	                   }
+	                   public void onClick(DialogInterface dialog, int id) {}
 	               });
-	        	AlertDialog alertDialog = builder.create();
-	        	alertDialog.show();
+	        	AlertDialog aboutDialog = builder.show();
+
+	        	TextView textView = (TextView) aboutDialog.findViewById(android.R.id.message);
+	            textView.setTextSize(12);
+	            //aboutDialog.show();
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
