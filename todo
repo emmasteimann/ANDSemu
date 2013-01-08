@@ -4,10 +4,10 @@
 - google translate untranslated strings
 - in-app about page, show readme
 - file dialog should open the directory where we last loaded a rom from
-- thank you note at bottom of home screen
 - check if games are in Games folder else open sdcard
 - hardcoded strings moved to strings.xml
 - fix squashed controls in landscape
+- add pause button to emulation activity
 
 
 * low level *
