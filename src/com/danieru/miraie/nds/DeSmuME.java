@@ -38,7 +38,6 @@ class DeSmuME {
 	{
 		if(loaded)
 			return;
-		loaded = true;
 		
 		System.loadLibrary("cpudetect");
 		final int cpuType = getCPUType();
@@ -56,6 +55,8 @@ class DeSmuME {
 			Log.i(ANDSemuApplication.TAG, "Using compatibility native library");
 			break;
 		}
+
+		loaded = true;
 	}
 	
 	public static boolean isLoaded() {
