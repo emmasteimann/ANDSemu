@@ -56,7 +56,11 @@ class EmulatorThread extends Thread {
 	}
 	
 	public void changeSound(int set) {
-		pendingSoundChange = set;
+		 pendingSoundChange = set;
+	}
+	
+	public void scheduleSoundPause() {
+		pendingSoundChange = new Integer(0);
 	}
 	
 	public void setCancel(boolean set) {
@@ -78,7 +82,7 @@ class EmulatorThread extends Thread {
 		}
 	}
 	
-	public void sheduleAutosave() {
+	public void scheduleAutosave() {
 		pendingAutosave = true;
 	}
 	
@@ -129,8 +133,8 @@ class EmulatorThread extends Thread {
 				pendingSoundChange = null;
 			}
 			if(pendingAutosave) {
-				Log.i(ANDSemuApplication.TAG, "Autosaving!");
-				DeSmuME.saveState(11);
+				//Log.i(ANDSemuApplication.TAG, "Autosaving!");
+				//DeSmuME.saveState(11);
 				pendingAutosave = false;
 			}
 			

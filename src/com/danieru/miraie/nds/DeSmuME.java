@@ -58,6 +58,10 @@ class DeSmuME {
 		}
 	}
 	
+	public static boolean isLoaded() {
+		return loaded == true;
+	}
+	
 	static native int getCPUType();
 	static native void init();
 	static native void runCore();

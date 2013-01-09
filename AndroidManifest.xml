@@ -17,7 +17,7 @@
     android:label="@string/app_name"
     android:name="ANDSemuApplication">
         
-        <activity android:name="com.danieru.miraie.nds.EmulateActivity"
+        <activity android:name=".EmulateActivity"
     		android:configChanges="keyboardHidden"
             android:label="@string/title_activity_main" >
         </activity>
@@ -39,7 +39,7 @@
         
         <activity android:name=".Cheats" />
         
-        <activity android:name="com.danieru.miraie.nds.HomeActivity"
+        <activity android:name=".HomeActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

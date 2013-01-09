@@ -170,7 +170,7 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		if(created)
 			coreThread.start();
 		else
-			coreThread.changeSound(DeSmuME.getSettingInt(Settings.ENABLE_SOUND, 0));
+			coreThread.changeSound(prefs.getBoolean(Settings.ENABLE_SOUND, false) ? 1 : 0);
 	}
 	
 	void pauseEmulation() {
@@ -190,7 +190,8 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 	public void onPause() {
 		super.onPause();
 		pauseEmulation();
-		coreThread.sheduleAutosave();
+		coreThread.scheduleSoundPause();
+		coreThread.scheduleAutosave();
 	}
 	
 	@Override
@@ -384,6 +385,11 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		
 		
 		void resize(int newWidth, int newHeight, int newPixelFormat) {
+			// skip this resize if native libraries
+			// have not been loaded yet.
+			if (!DeSmuME.isLoaded())
+				return;
+			
 			synchronized(view.surfaceHolder) {
 				sourceWidth = DeSmuME.getNativeWidth();
 				sourceHeight = DeSmuME.getNativeHeight();
