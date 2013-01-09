@@ -21,8 +21,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import android.util.Log;
-
 class EmulatorThread extends Thread {
 	
 	public EmulatorThread(EmulateActivity activity) {
@@ -60,7 +58,7 @@ class EmulatorThread extends Thread {
 	}
 	
 	public void scheduleSoundPause() {
-		pendingSoundChange = new Integer(0);
+		pendingSoundChange = Integer.valueOf(0);
 	}
 	
 	public void setCancel(boolean set) {
