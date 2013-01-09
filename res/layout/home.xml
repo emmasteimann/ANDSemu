@@ -119,6 +119,10 @@
     
     
     
+<LinearLayout
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
@@ -159,6 +163,7 @@
 
         </LinearLayout>
     </ScrollView>
+</LinearLayout>
 
 </LinearLayout>
 </ScrollView>

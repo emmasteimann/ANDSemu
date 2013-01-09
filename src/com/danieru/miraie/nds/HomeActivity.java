@@ -1,5 +1,7 @@
 package com.danieru.miraie.nds;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.*;
@@ -40,7 +43,7 @@ public class HomeActivity extends SherlockActivity implements OnSharedPreference
         Intent settingsIntent = new Intent(view.getContext(), Settings.class);
         startActivityForResult(settingsIntent, 0);
 	}
-	
+		
 	/* Play new game */
 	public void pickRom(View view) {
 		Intent i = new Intent(this, FileDialog.class);
@@ -84,11 +87,20 @@ public class HomeActivity extends SherlockActivity implements OnSharedPreference
 	            Intent settingsIntent = new Intent(this, Settings.class);
 	            startActivity(settingsIntent);
 	            return true;
+	        case R.id.menu_about:
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        	builder.setMessage(R.string.about)
+	               .setPositiveButton(R.string.thankyou, new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {}
+	               });
+	        	AlertDialog aboutDialog = builder.show();
+	        	TextView textView = (TextView) aboutDialog.findViewById(android.R.id.message);
+	            textView.setTextSize(14);
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-
+	
 	/* Quick Settings */
 	public void setSound(View view) {
 		SharedPreferences.Editor editor = prefs.edit();
