@@ -129,8 +129,8 @@ class EmulatorThread extends Thread {
 				pendingSoundChange = null;
 			}
 			if(pendingAutosave) {
-				Log.i(ANDSemuApplication.TAG, "Autosaving!");
-				DeSmuME.saveState(11);
+				//Log.i(ANDSemuApplication.TAG, "Autosaving!");
+				//DeSmuME.saveState(11);
 				pendingAutosave = false;
 			}
 			
