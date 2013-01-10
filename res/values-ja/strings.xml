@@ -3,7 +3,7 @@
 	<!-- Release 1 -->
     <string name="app_name">"ANDSemu"</string>
     <string name="title_activity_main">"ANDSemu"</string>
-	<string name="rom_error">"このROMのロード中にエラーが発生しました：（"</string>
+	<string name="rom_error">"このROMのロード中にエラーが発生しました ：（"</string>
 	<string name="OK">"OK"</string>
 	<string name="location">"位置"</string>
     <string name="cant_read_folder">"フォルダが読められない"</string>
@@ -17,7 +17,7 @@
     <string name="Settings">"設定"</string>
     
     <!-- Release 2 -->
-    <string name="touchnotify">"タッチモードとテンキーモードを切り替えるには、上部に \"タッチ\"ボタンをタップ"</string>
+    <string name="touchnotify">"タッチモードとテンキーモードを切り替えるには、上部に \"タッチ\" ボタンをタップ"</string>
     <string name="frameskip">"フレームスキップ"</string>
     <string name="frameskipdesc">"エミュレート時に何フレームスキップする。遅いエミュレーションが実時間に一致させるのに役立ちます。"</string>
     <string name="vsync">"VSync"</string>
@@ -47,7 +47,7 @@
     <string name="no">"No"</string>
     
     <!-- Release 8 -->
-    <string name="Display">"表示"</string>
+    <string name="Display">"画面"</string>
     <string name="Controls">"コントロール"</string>
     <string name="EditLayout">"編集コントロールのレイアウト"</string>
     <string name="EditLayoutDesc">"タッチコントロールを画面上に配置される場所を編集します。"</string>
@@ -68,7 +68,7 @@
     <string name="KeymapValuePreface">"現在にマッピング"</string>
     <string name="EditKeymap">"キーマッピングを編集"</string>
     <string name="EditKeymapDesc">"ハードウェアキーからDSのボタンにマッピングを編集します。"</string>
-    <string name="Up">"--up"</string>
+    <string name="Up">"Up"</string>
     <string name="Down">"Down"</string>
     <string name="Left">"Left"</string>
     <string name="Right">"Right"</string>
@@ -104,10 +104,21 @@
     <string name="AlwaysTouchDesc">"いつもしないときは、タッチモードでも、DSのタッチスクリーンを処理します。同時にコントロールとタッチスクリーンを使用して必要なゲームのために。"</string>
     
     <!-- Release 14 -->
-    <string name="CheatCode">"コード"</string>
+    <string name="CheatCode">"コー​​ド"</string>
     <string name="CurrentValue">"現在値"</string>
     <string name="ImageOfFolder">"ファイルのイメージ"</string>
-    
+    <string name="about">"ANDSemuはnds4droidのフォークです。順にnds4droidはJeffrey Quesnelle Android用へのdesmumeのポートです\n\nをANDSemuがcollectivlyチームmiraieとして知られている大学の友人のグループによって行われます\n\nクレジット：。nds4droidの\nジェフリーQuesnelle（emozilla）、\ウィキペディアやAndroidのファイルのための私達の現在の青い脂肪ndsのアイコン\nのアレクサンダーポノマリョフ、彼のcontrabutionsのホワイトNDS（開発でのみ使用）\nのエヴァン·アモスのアイコンのためのdesmume \nのためのSykonist nTeamのdesmume、ダイアログ\nLachlan Tychsen  - スミス、数学ネオンます\nマキシムShemanarevため、アンチ粒ジオメトリ用（AGG）\np7zip＆7zipを、アーカイブのための強力な"</string>
+	<string name="thankyou">"ありがとう！"</string>
+	
+	<!-- Release m16 -->
+	<string name="CallToPlay">"今すぐプレイ！"</string>
+	<string name="ResumeGame">"ゲームを再開"</string>
+    <string name="CallToLoadAutosave">"最後の自動保存を再生"</string>
+    <string name="QuickSettings">"クイック設定"</string>
+    <string name="AllSettings">"すべての設定"</string>
+    <string name="Autosaves">"自動保存"</string>
+    <string name="NoAutosaves">"自動保存はまだありません"</string>
+    <string name="About">"このアプリについて"</string>    
     
     <!-- Do not translate -->
     <string-array name="filternames">
@@ -135,7 +146,7 @@
         <item>"1"</item>
         <item>"2"</item>
         <item>"3"</item>
-        <item>"４"</item>
+        <item>"4"</item>
         <item>"5"</item>
         <item>"6"</item>
         <item>"7"</item>
@@ -180,7 +191,7 @@
         <item>"1"</item>
         <item>"2"</item>
         <item>"3"</item>
-        <item>"4 "</item>
+        <item>"4"</item>
         <item>"5"</item>
     </string-array>
     
