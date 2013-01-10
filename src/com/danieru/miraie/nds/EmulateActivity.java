@@ -283,6 +283,7 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 			view.haptic = prefs.getBoolean(Settings.HAPTIC, false);
 			view.dontRotate = prefs.getBoolean(Settings.DONT_ROTATE_LCDS, false);
 			view.alwaysTouch = prefs.getBoolean(Settings.ALWAYS_TOUCH, false);
+			view.landscapeStackScreens = prefs.getBoolean(Settings.LANDSCAPE_STACK_SCREENS, false);
 			
 			controls.loadMappings(this);
 			
@@ -374,6 +375,7 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		boolean sized = false;
 		boolean landscape = false;
 		boolean dontRotate = false;
+		boolean landscapeStackScreens = false;
 		int sourceWidth;
 		int sourceHeight;
 		Rect srcMain, destMain, srcTouch, destTouch;
@@ -419,8 +421,14 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 				
 				forceTouchScreen = !prefs.getBoolean("Controls." + (landscape ? "Landscape." : "Portrait.") + "Draw", false);
 				
-				
-				if(landscape) {
+				if (landscape && landscapeStackScreens) {
+					double ndsAspectRatio = 256.0 / (192 * 2);
+					int adjustedWidth = (int) Math.floor(newHeight * ndsAspectRatio);
+					int offset = (newWidth - adjustedWidth) / 2;
+					destMain = new Rect(offset, 0, newWidth - offset, newHeight / 2);
+					destTouch = new Rect(offset, newHeight / 2, newWidth - offset, newHeight);
+					
+				} else if(landscape) {
 					destMain = new Rect(0, 0, newWidth / 2, newHeight);
 					destTouch = new Rect(newWidth / 2, 0, newWidth, newHeight);
 				}
@@ -429,7 +437,7 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 					destTouch = new Rect(0, newHeight / 2, newWidth, newHeight);
 				}
 				
-				if(landscape && dontRotate) {
+				if(landscape && dontRotate && !landscapeStackScreens) {
 					emuBitmapMain = Bitmap.createBitmap(sourceHeight / 2, sourceWidth, is565 ? Config.RGB_565 : Config.ARGB_8888);
 					emuBitmapTouch = Bitmap.createBitmap(sourceHeight / 2, sourceWidth, is565 ? Config.RGB_565 : Config.ARGB_8888);
 					srcMain = new Rect(0, 0, sourceHeight / 2, sourceWidth);

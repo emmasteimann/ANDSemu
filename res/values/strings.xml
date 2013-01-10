@@ -131,6 +131,9 @@
     <!-- Release m17 -->
     <string name="Pause">Pause</string>
     <string name="Resume">Resume</string>
+    <string name="NdsLikeLandscape">NDS like landscape</string>
+    <string name="NdsLikeLandscapeDesc">In landscape orientation stack the top screen above the bottom screen.
+        The controls will be alongside the screens.</string>
     
     
     

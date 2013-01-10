@@ -157,6 +157,7 @@ public class Settings extends SherlockPreferenceActivity {
 	public static final String MAPPING_R = "Controls.KeyMap.R";
 	public static final String MAPPING_TOUCH = "Controls.KeyMap.Touch";
 	public static final String DONT_ROTATE_LCDS = "WindowRotate";
+	public static final String LANDSCAPE_STACK_SCREENS = "LandscapeStackScreens";
 	public static final String LANGUAGE = "Language";
 	public static final String ENABLE_MICROPHONE = "EnableMicrophone";
 	public static final String ALWAYS_TOUCH = "Controls.AlwaysTouch";
@@ -215,6 +216,8 @@ public class Settings extends SherlockPreferenceActivity {
 			editor.putBoolean(LCD_SWAP, false);
 		if(!prefs.contains(DONT_ROTATE_LCDS))
 			editor.putBoolean(DONT_ROTATE_LCDS, false);
+		if(!prefs.contains(LANDSCAPE_STACK_SCREENS))
+			editor.putBoolean(LANDSCAPE_STACK_SCREENS, false);
 		if(!prefs.contains(ENABLE_MICROPHONE))
 			editor.putBoolean(ENABLE_MICROPHONE, true);
 		if(!prefs.contains(LANGUAGE)) {
