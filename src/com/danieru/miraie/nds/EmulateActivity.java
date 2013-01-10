@@ -387,8 +387,10 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		void resize(int newWidth, int newHeight, int newPixelFormat) {
 			// skip this resize if native libraries
 			// have not been loaded yet.
-			if (!DeSmuME.isLoaded())
+			if (!DeSmuME.isLoaded()) {
+				doForceResize = true;
 				return;
+			}
 			
 			synchronized(view.surfaceHolder) {
 				sourceWidth = DeSmuME.getNativeWidth();
