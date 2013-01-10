@@ -25,6 +25,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.HapticFeedbackConstants;
@@ -179,18 +180,33 @@ class Controls {
 		switch(event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 		case MotionEvent.ACTION_MOVE:
-			float x = event.getX();
-			float y = event.getY();
+			double x = event.getX();
+			double y = event.getY();
+			
+			// convert to bottom touch screen coordinates if needed
+			if(landscape && view.landscapeStackScreens) {
+				// translate to a full width virtual screen
+				double ratioBetweenDeviceAndScreenWidth = (view.height * NDSView.ndsAspectRatio) / view.width;
+				x = (x - view.width / 2) / ratioBetweenDeviceAndScreenWidth + view.width / 2;
+
+				// skip touches outside the screen area
+				if (x < 0 || x > view.width)
+					break;
+				
+				// compensate for scaling that expects traditional landscape
+				y = y * 2;
+				x = x / 2;
+				
+			} else if(landscape && view.dontRotate) {
+				double tmpy = x / 1.33f;
+				x = (view.height / 2 - y) * 1.33f;
+				y = tmpy;
+			}
+			
 			x /= xscale;
 			y /= yscale;
-			//convert to bottom touch screen coordinates
-			if(landscape && view.dontRotate) {
-				final float newy = x / 1.33f;
-				final float newx = (192 - y) * 1.33f;
-				x = newx;
-				y = newy;
-			}
-			if(landscape && !view.dontRotate) {
+			
+			if(landscape && !view.dontRotate && !view.landscapeStackScreens) {
 				if(!view.lcdSwap) {
 					x -= 256;
 					if(x >= 0)
@@ -230,7 +246,7 @@ class Controls {
 	boolean onTouchEvent(MotionEvent event) {
 		if(xscale == 0 || yscale == 0)
 			return false;
-		if(DeSmuME.touchScreenMode || view.forceTouchScreen) 
+		if(DeSmuME.touchScreenMode || view.forceTouchScreen || view.landscapeStackScreens) 
 			return touchScreenProcess(event);	
 		else
 		{

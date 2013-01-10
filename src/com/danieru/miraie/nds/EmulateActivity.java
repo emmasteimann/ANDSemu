@@ -380,6 +380,8 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		int sourceHeight;
 		Rect srcMain, destMain, srcTouch, destTouch;
 		int width = 0, height = 0, pixelFormat;
+		int adjustedWidth = 0;
+		static final double ndsAspectRatio = 256.0 / (192 * 2);
 		
 		boolean doForceResize = false;
 		public void forceResize() {
@@ -422,7 +424,6 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 				forceTouchScreen = !prefs.getBoolean("Controls." + (landscape ? "Landscape." : "Portrait.") + "Draw", false);
 				
 				if (landscape && landscapeStackScreens) {
-					double ndsAspectRatio = 256.0 / (192 * 2);
 					int adjustedWidth = (int) Math.floor(newHeight * ndsAspectRatio);
 					int offset = (newWidth - adjustedWidth) / 2;
 					destMain = new Rect(offset, 0, newWidth - offset, newHeight / 2);
