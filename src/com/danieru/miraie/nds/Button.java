@@ -54,14 +54,14 @@ class Button {
 	static final Button ABXY_PORT_DEFAULT = new Button(new Rect(397, 755, 759, 1072), Button.BUTTON_ABXY);
 	static final Button START_PORT_DEFAULT = new Button(new Rect(270, 1082, 366, 1147), Button.BUTTON_START);
 	static final Button SELECT_PORT_DEFAULT = new Button(new Rect(400, 1082, 485, 1145), Button.BUTTON_SELECT);
-	
-	static final Button L_LAND_DEFAULT = new Button(new Rect(0, 0, 160, 90), Button.BUTTON_L);
-	static final Button R_LAND_DEFAULT = new Button(new Rect(994, 0, 1152, 90), Button.BUTTON_R);
-	static final Button DPAD_LAND_DEFAULT = new Button(new Rect(0, 454, 334, 768), Button.BUTTON_DPAD);
-	static final Button ABXY_LAND_DEFAULT = new Button(new Rect(770, 451, 1132, 768), Button.BUTTON_ABXY);
-	static final Button START_LAND_DEFAULT = new Button(new Rect(380, 703, 476, 768), Button.BUTTON_START);
-	static final Button TOUCH_LAND_DEFAULT = new Button(new Rect(506, 703, 627, 768), Button.BUTTON_TOUCH);
-	static final Button SELECT_LAND_DEFAULT = new Button(new Rect(667, 703, 752, 768), Button.BUTTON_SELECT);
+
+	static final Button L_LAND_DEFAULT = new Button(new Rect(25, 0, 185, 90), Button.BUTTON_L);
+	static final Button R_LAND_DEFAULT = new Button(new Rect(1350, 0, 1511, 90), Button.BUTTON_R);
+	static final Button DPAD_LAND_DEFAULT = new Button(new Rect(25, 262, 359, 576), Button.BUTTON_DPAD);
+	static final Button ABXY_LAND_DEFAULT = new Button(new Rect(1150, 259, 1511, 576), Button.BUTTON_ABXY);
+	static final Button START_LAND_DEFAULT = new Button(new Rect(828, 511, 924, 576), Button.BUTTON_START);
+	static final Button TOUCH_LAND_DEFAULT = new Button(new Rect(708, 511, 828, 576), Button.BUTTON_TOUCH);
+	static final Button SELECT_LAND_DEFAULT = new Button(new Rect(623, 511, 708, 576), Button.BUTTON_SELECT);
 	
 	
 	static final HashMap<Integer, Button> portraitToDefault;
