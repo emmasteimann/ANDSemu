@@ -128,6 +128,10 @@
     <string name="NoAutosaves">No autosaves yet</string>
     <string name="About">About</string>
     
+    <!-- Release m17 -->
+    <string name="Pause">Pause</string>
+    <string name="Resume">Resume</string>
+    
     
     
     <!-- Do not translate -->
