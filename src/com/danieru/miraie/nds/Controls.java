@@ -155,7 +155,7 @@ class Controls {
 	}
 	
 	
-	//These coordinates are in our "native" coordinate space, which was arbitrarily chosen to be 768x1152 (exactly three times the DS native resolution)
+	//These coordinates are in our "native" coordinate space, which was arbitrarily chosen to be 768x1152 (exactly four times the DS native resolution)
 	public static final Rect defaultPortSpace = new Rect(0, 0, 768, 1152);
 	public static final Rect defaultLandSpace = new Rect(0, 0, 1152, 768);
 	

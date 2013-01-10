@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -336,11 +337,6 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 			
 		}
 		
-		boolean doForceResize = false;
-		public void forceResize() {
-			doForceResize = true;
-		}
-		
 		
 		
 		@Override
@@ -383,6 +379,10 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		Rect srcMain, destMain, srcTouch, destTouch;
 		int width = 0, height = 0, pixelFormat;
 		
+		boolean doForceResize = false;
+		public void forceResize() {
+			doForceResize = true;
+		}
 		
 		void resize(int newWidth, int newHeight, int newPixelFormat) {
 			// skip this resize if native libraries
@@ -392,18 +392,23 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 				return;
 			}
 			
+			if (newWidth  == 0 || newHeight == 0) {
+				doForceResize = true;
+				Log.w(ANDSemuApplication.TAG, "Called with zero heights, skipping.");
+				return;
+			}
+			
 			synchronized(view.surfaceHolder) {
 				sourceWidth = DeSmuME.getNativeWidth();
 				sourceHeight = DeSmuME.getNativeHeight();
-				resized = true;
+
 				doForceResize = false;
-				
-				//cheap hack to avoid a race condition
-				if (sourceHeight == 0 || sourceWidth == 0) {
+				// avoids a race condition
+				if (sourceHeight < 2 || sourceWidth < 2) {
 					sourceHeight = 2;
 					sourceWidth = 2;
-					resized = false;
 					doForceResize = true;
+					Log.w(ANDSemuApplication.TAG, "Skipping this resize, new one scheduled.");
 				}
 				
 				final boolean hasScreenFilter = DeSmuME.getSettingInt(Settings.SCREEN_FILTER, 0) != 0;
@@ -444,6 +449,7 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 				height = newHeight;
 				pixelFormat = newPixelFormat;
 				sized = true;
+				resized = true;
 			}
 		}
 
