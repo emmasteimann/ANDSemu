@@ -70,6 +70,11 @@ class Controls {
 	
 	void loadControls(Context context, int screenWidth, int screenHeight, boolean is565, boolean landscape) {
 		
+		if (screenWidth < 100)
+			screenWidth = 100;
+		if (screenHeight < 100)
+			screenHeight = 100;
+		
 		screen = new Rect(0, 0, screenWidth, screenHeight);
 		
 		xscale = (float)screen.width() / (landscape ? 512.0f : 256.0f);
