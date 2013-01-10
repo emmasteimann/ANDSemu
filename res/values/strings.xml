@@ -103,12 +103,30 @@
     <string name="AlwaysTouch">Always allow touch</string>
     <string name="AlwaysTouchDesc">Always process the DS touchscreen, even when not in touch mode. For games that require using controls and touchscreen at the same time.</string>
     
-    <!-- Release 14 -->
+    <!-- Release m14 -->
     <string name="CheatCode">Code</string>
     <string name="CurrentValue">Current value</string>
     <string name="ImageOfFolder">Image of file</string>
-    <string name="about">ANDSemu is a fork of nds4droid. nds4droid in turn is a port of DeSmuME to android by Jeffrey Quesnelle.\n\nANDSemu is done by a group of university friends collectivly known as team miraie.\n\nCredits:\nJeffrey Quesnelle (emozilla), for nds4droid\nTeam DeSmuME, for DeSmuME\nSykonist, for the icon of the white nds (only used in development)\nEvan-Amos, for his contrabutions to wikipedia and our current blue fat nds icon\nAlexander Ponomarev, for android-file-dialog\nLachlan Tychsen - Smith, for math-neon\nMaxim Shemanarev, for Anti-Grain Geometry (AGG)\np7zip &amp; 7zip, for powerful archiving</string>
+    <string name="about">ANDSemu is a fork of nds4droid. nds4droid in turn is a port of DeSmuME to android by Jeffrey Quesnelle.\n\n
+        ANDSemu is done by a group of university friends collectivly known as team miraie.\n\n
+        Credits:\n
+        Jeffrey Quesnelle (emozilla), for nds4droid\nTeam DeSmuME, for DeSmuME\n
+        Sykonist, for the icon of the white nds (only used in development)\n
+        Evan-Amos, for his contrabutions to wikipedia and our current blue fat nds icon\n
+        Alexander Ponomarev, for android-file-dialog\nLachlan Tychsen - Smith, for math-neon\n
+        Maxim Shemanarev, for Anti-Grain Geometry (AGG)\
+        np7zip &amp; 7zip, for powerful archiving</string>
 	<string name="thankyou">Thank you!</string>
+	
+	<!-- Release m16 -->
+	<string name="CallToPlay">Play Now!</string>
+	<string name="ResumeGame">Resume Game</string>
+    <string name="CallToLoadAutosave">Play last Autosave</string>
+    <string name="QuickSettings">Quick Settings</string>
+    <string name="AllSettings">All Settings</string>
+    <string name="Autosaves">Autosaves</string>
+    <string name="NoAutosaves">No autosaves yet</string>
+    <string name="About">About</string>
     
     
     

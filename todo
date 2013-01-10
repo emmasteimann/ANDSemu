@@ -4,7 +4,6 @@
 - google translate untranslated strings
 - file dialog should open the directory where we last loaded a rom from
 - check if games are in Games folder else open sdcard
-- hardcoded strings moved to strings.xml
 - fix squashed controls in landscape
 - add pause button to emulation activity
 
