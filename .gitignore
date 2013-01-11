@@ -10,6 +10,9 @@ lint.xml
 *.ii
 *.s
 
+# Mac thumbnail metadata
+.DS_Store
+
 # -- Android ignores ----
 # built application files
 *.apk
