@@ -16,7 +16,7 @@
 #include "../debug.h"
 #include "../NDSSystem.h"
 #include "../path.h"
-#include "../GPU_OSD.h"
+#include "../GPU_osd.h"
 #include "../addons.h"
 #include "../slot1.h"
 #include "../saves.h"
@@ -29,8 +29,8 @@
 #include "neontest.h"
 #endif
 
-#define JNI(X,...) Java_com_seandev_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
-#define JNI_NOARGS(X) Java_com_seandev_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz)
+#define JNI(X,...) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
+#define JNI_NOARGS(X) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz)
 
 unsigned int frameCount = 0;
 
@@ -624,12 +624,12 @@ void JNI(init, jobject _inst)
 	sndbuffersize = GetPrivateProfileInt(env, "Sound","SoundBufferSize2", DESMUME_SAMPLE_RATE*8/60, IniName);
 	SPU_ChangeSoundCore(sndcoretype, sndbuffersize);
 	
-	static const char* nickname = "Sean";
+	static const char* nickname = "Player";
 	fw_config.nickname_len = strlen(nickname);
 	for(int i = 0 ; i < fw_config.nickname_len ; ++i)
 		fw_config.nickname[i] = nickname[i];
 		
-	static const char* message = "DSdroid rocks!";
+	static const char* message = "Nintendo is awesome!";
 	fw_config.message_len = strlen(message);
 	for(int i = 0 ; i < fw_config.message_len ; ++i)
 		fw_config.message[i] = message[i];
@@ -788,7 +788,7 @@ void JNI_NOARGS(exit)
 
 unsigned int GetPrivateProfileInt(JNIEnv* env, const char* lpAppName, const char* lpKeyName, int nDefault, const char* lpFileName)
 {
-	jclass javaClass = env->FindClass("com/seandev/ds4droid/DeSmuME");
+	jclass javaClass = env->FindClass("com/danieru/miraie/nds/DeSmuME");
 	if(!javaClass)
 		return nDefault;
 	jmethodID getSettingInt = env->GetStaticMethodID(javaClass, "getSettingInt","(Ljava/lang/String;I)I");
