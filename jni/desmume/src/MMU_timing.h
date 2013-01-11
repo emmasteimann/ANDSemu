@@ -1,4 +1,4 @@
-/*
+ /*
 	Copyright (C) 2006 yopyop
 	Copyright (C) 2007 shash
 	Copyright (C) 2007-2011 DeSmuME team
@@ -39,34 +39,8 @@
 // obviously, these defines don't cover all the variables or features needed,
 // and in particular, DMA or code+data access bus contention is still missing.
 
-	//disable this to prevent the advanced timing logic from ever running at all
-#define ENABLE_ADVANCED_TIMING
-
-#ifdef ENABLE_ADVANCED_TIMING
-	// makes non-sequential accesses slower than sequential ones.
-#define ACCOUNT_FOR_NON_SEQUENTIAL_ACCESS
-	//(SOMETIMES THIS IS A BIG SPEED HIT!)
-
-	// enables emulation of code fetch waits.
-#define ACCOUNT_FOR_CODE_FETCH_CYCLES
-
-	// makes access to DTCM (arm9 only) fast.
-#define ACCOUNT_FOR_DATA_TCM_SPEED
-
-	// enables simulation of cache hits and cache misses.
-#define ENABLE_CACHE_CONTROLLER_EMULATION
-
-#endif //ENABLE_ADVANCED_TIMING
-
-//
-////////////////////////////////////////////////////////////////
-
 FORCEINLINE bool USE_TIMING() { 
-#ifdef ENABLE_ADVANCED_TIMING
-	return CommonSettings.advanced_timing;
-#else
 	return false;
-#endif
 }
 
 

@@ -46,6 +46,12 @@ LOCAL_SRC_FILES			:= 	C/Threads.c \
 							CPP/7zip/Archive/7z/7zRegister.cpp \
 							CPP/7zip/Archive/7z/7zSpecStream.cpp \
 							CPP/7zip/Archive/7z/7zUpdate.cpp \
+							CPP/7zip/Archive/Rar/RarHandler.cpp \
+							CPP/7zip/Archive/Rar/RarHeader.cpp \
+							CPP/7zip/Archive/Rar/RarIn.cpp \
+							CPP/7zip/Archive/Rar/RarItem.cpp \
+							CPP/7zip/Archive/Rar/RarRegister.cpp \
+							CPP/7zip/Archive/Rar/RarVolumeInStream.cpp \
 							CPP/7zip/Archive/Zip/ZipAddCommon.cpp \
 							CPP/7zip/Archive/Zip/ZipHandler.cpp \
 							CPP/7zip/Archive/Zip/ZipHandlerOut.cpp \
@@ -107,6 +113,11 @@ LOCAL_SRC_FILES			:= 	C/Threads.c \
 							CPP/7zip/Compress/DeflateEncoder.cpp \
 							CPP/7zip/Compress/DeflateRegister.cpp \
 							CPP/7zip/Compress/LzmaRegister.cpp \
+							CPP/7zip/Compress/RarCodecsRegister.cpp \
+							CPP/7zip/Compress/Rar1Decoder.cpp \
+							CPP/7zip/Compress/Rar2Decoder.cpp \
+							CPP/7zip/Compress/Rar3Decoder.cpp \
+							CPP/7zip/Compress/Rar3Vm.cpp \
 							CPP/7zip/Compress/BZip2Crc.cpp \
 							CPP/7zip/Compress/BZip2Decoder.cpp \
 							CPP/7zip/Compress/BZip2Encoder.cpp \
@@ -118,10 +129,12 @@ LOCAL_SRC_FILES			:= 	C/Threads.c \
 							CPP/7zip/Crypto/MyAes.cpp \
 							CPP/7zip/Crypto/Pbkdf2HmacSha1.cpp \
 							CPP/7zip/Crypto/HmacSha1.cpp \
+							CPP/7zip/Crypto/RarAes.cpp \
+							CPP/7zip/Crypto/Rar20Crypto.cpp \
 							CPP/7zip/Crypto/WzAes.cpp
 
 LOCAL_ARM_MODE 			:= 	thumb
 LOCAL_ARM_NEON 			:= 	false
-LOCAL_CFLAGS			:= -fexceptions -DCOMPRESS_MT
+LOCAL_CFLAGS			:= -DCOMPRESS_MT
 
 include $(BUILD_STATIC_LIBRARY)

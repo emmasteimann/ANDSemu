@@ -1,35 +1,9 @@
-/*	sndopensl.cpp
-	Copyright (C) 2012 Jeffrey Quesnelle
-
-	This file is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-
-	This file is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
-*/
+#include <SLES/OpenSLES.h>
+#include <SLES/OpenSLES_Android.h>
 
 #include "SPU.h"
 #include "sndopensl.h"
 #include "main.h"
-
-#include <SLES/OpenSLES.h>
-#include <SLES/OpenSLES_Android.h>
-
-int SNDOpenSLInit(int buffersize);
-void SNDOpenSLDeInit();
-void SNDOpenSLUpdateAudio(s16 *buffer, u32 num_samples);
-u32 SNDOpenSLGetAudioSpace();
-void SNDOpenSLMuteAudio();
-void SNDOpenSLUnMuteAudio();
-void SNDOpenSLSetVolume(int volume);
-void SNDOpenSLClearAudioBuffer();
 
 SoundInterface_struct SNDOpenSL = {
 	SNDCORE_OPENSL,
@@ -40,8 +14,7 @@ SoundInterface_struct SNDOpenSL = {
 	SNDOpenSLGetAudioSpace,
 	SNDOpenSLMuteAudio,
 	SNDOpenSLUnMuteAudio,
-	SNDOpenSLSetVolume,
-	SNDOpenSLClearAudioBuffer,
+	SNDOpenSLSetVolume
 };
 
 #define FAILED(X) (X) != SL_RESULT_SUCCESS
@@ -55,15 +28,16 @@ static SLAndroidSimpleBufferQueueItf bqPlayerBufferQueue;
 static SLVolumeItf bqPlayerVolume;
 static bool everEnqueued = false;
 
+static bool currentlyPlaying = false;
+static u32 soundlen;
+static u32 soundbufsize;
+static int nextSoundBuffer = -1;
+static SLmillibel maxVol;
 
 class SoundBuffer
 {
 public:
 	SoundBuffer() : data(NULL)
-	{
-		reset();
-	}
-	~SoundBuffer()
 	{
 		reset();
 	}
@@ -84,31 +58,23 @@ static const int NUM_BUFFERS = 2;
 SoundBuffer buffers[NUM_BUFFERS];
 SoundBuffer empty;
 
-static bool muted = false;
-static bool currentlyPlaying = false;
-static int soundbufsize = 0;
-static int nextSoundBuffer = -1;
-static SLmillibel maxVol;
-
 void bqPlayerCallback(SLAndroidSimpleBufferQueueItf bq, void *context)
 {
 	SLresult result;
+    
 	if(buffers[nextSoundBuffer].avail)
 	{
 		result = (*bqPlayerBufferQueue)->Enqueue(bqPlayerBufferQueue, empty.data, soundbufsize);
-		//LOGI("Returned empty sound buffer");
 		return;
 	}
-	//LOGI("Returned sound buffer %d", nextSoundBuffer);
 	result = (*bqPlayerBufferQueue)->Enqueue(bqPlayerBufferQueue, buffers[nextSoundBuffer].data, buffers[nextSoundBuffer].samples * sizeof(s16) * 2);
 	buffers[nextSoundBuffer == 0 ? 1 : 0].avail = true;
 }
 
 int SNDOpenSLInit(int buffersize)
 {
-	
 	SLresult result;
-	
+    
 	if(engineObject == NULL)
 	{
 		if(FAILED(result = slCreateEngine(&engineObject, 0, NULL, 0, NULL, NULL)))
@@ -166,7 +132,10 @@ int SNDOpenSLInit(int buffersize)
 		
 	buffers[0].reset();
 	buffers[1].reset();
-	soundbufsize = buffersize;
+    
+    soundlen = 44100/*freq*/ / 60;
+	soundbufsize = buffersize * sizeof(s16) * 2;
+    
 	if ((buffers[0].data = new s16[soundbufsize / sizeof(s16)]) == NULL)
 		return -1;
 	if ((buffers[1].data = new s16[soundbufsize / sizeof(s16)]) == NULL)
@@ -177,9 +146,8 @@ int SNDOpenSLInit(int buffersize)
 	memset(buffers[0].data, 0, soundbufsize);
 	memset(buffers[1].data, 0, soundbufsize);
 	memset(empty.data, 0, soundbufsize);
-	muted = false;
 	currentlyPlaying = false;
-	LOGI("OpenSL created (for audio output)");
+	LOGI("OpenSL created");
 	return 0;
 }
 
@@ -194,11 +162,6 @@ void SNDOpenSLDeInit()
         (*outputMixObject)->Destroy(outputMixObject);
         outputMixObject = NULL;
 	}
-	
-	/*if (engineObject != NULL) {
-        (*engineObject)->Destroy(engineObject);
-		engineObject = NULL;
-	}*/
 }
 
 void SNDOpenSLUpdateAudio(s16 *buffer, u32 num_samples)
@@ -218,11 +181,9 @@ void SNDOpenSLUpdateAudio(s16 *buffer, u32 num_samples)
 				bqPlayerCallback(bqPlayerBufferQueue, NULL);
 				currentlyPlaying = true;
 			}
-			//LOGI("Copied %d samples to buffer %d", num_samples, nextSoundBuffer);
 			return;
 		}
 	}
-	//should never get here...
 }
 
 u32 SNDOpenSLGetAudioSpace()
@@ -253,12 +214,6 @@ void SNDOpenSLSetVolume(int volume)
 	else if(volume > 0)
 		level = maxVol / (100 - volume - 1);
 	(*bqPlayerVolume)->SetVolumeLevel(bqPlayerVolume, level);
-}
-
-void SNDOpenSLClearAudioBuffer()
-{
-	for(int i = 0 ; i < NUM_BUFFERS ; ++i)
-		memset(buffers[i].data, 0, soundbufsize);
 }
 
 void SNDOpenSLPaused(bool paused)

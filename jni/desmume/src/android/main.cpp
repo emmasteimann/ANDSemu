@@ -1,20 +1,3 @@
-/*
-	Copyright (C) 2012 Jeffrey Quesnelle
-
-	This file is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-
-	This file is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include <jni.h>
 #include <errno.h>
 
@@ -33,7 +16,7 @@
 #include "../debug.h"
 #include "../NDSSystem.h"
 #include "../path.h"
-#include "../GPU_osd.h"
+#include "../GPU_OSD.h"
 #include "../addons.h"
 #include "../slot1.h"
 #include "../saves.h"
@@ -46,8 +29,8 @@
 #include "neontest.h"
 #endif
 
-#define JNI(X,...) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
-#define JNI_NOARGS(X) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz)
+#define JNI(X,...) Java_com_seandev_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
+#define JNI_NOARGS(X) Java_com_seandev_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz)
 
 unsigned int frameCount = 0;
 
@@ -86,6 +69,8 @@ char androidTempPath[1024];
 bool useMmapForRomLoading;
 extern bool enableMicrophone;
 
+void doBitmapDraw(u8* pixels, u8* dest, int width, int height, int stride, int pixelFormat, int verticalOffset, bool rotate);
+
 extern "C" {
 
 void logCallback(const Logger& logger, const char* message)
@@ -112,12 +97,8 @@ struct MainLoopData
 
 VideoInfo video;
 
-/**
- * Initialize an EGL context for the current display.
- */
+//Initialize EGL context for current display
 static bool android_opengl_init() {
-	//call back into java here?
-	
 	const EGLint attribs[] = {
             EGL_RED_SIZE, 8,
 			EGL_GREEN_SIZE, 8,
@@ -133,14 +114,11 @@ static bool android_opengl_init() {
     EGLConfig config;
     EGLSurface surface;
     EGLContext context;
-
+    
     EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-
+    
     eglInitialize(display, 0, 0);
-
-    /* Here, the application chooses the configuration it desires. In this
-     * sample, we have a very simplified selection process, where we pick
-     * the first EGLConfig that matches our criteria */
+    
     eglChooseConfig(display, attribs, &config, 1, &numConfigs);
 
 	const EGLint surfaceAttribs[] = {
@@ -161,7 +139,6 @@ static bool android_opengl_init() {
 	INFO("Created OpenGL");
     return true;
 }
-
 
 
 void nds4droid_displayFrame()
@@ -199,106 +176,6 @@ void JNI_NOARGS(copyMasterBuffer)
 		u16* dest = (u16*)video.buffer;
 		for(int i=0;i<size;++i)
 			*dest++ = RGB15TO16_REVERSE(src[i]);
-	}
-}
-
-void doBitmapDraw(u8* pixels, u8* dest, int width, int height, int stride, int pixelFormat, int verticalOffset, bool rotate)
-{
-	if(pixelFormat == ANDROID_BITMAP_FORMAT_RGBA_8888)
-	{
-		u32* src = (u32*)pixels;
-		src += (verticalOffset * (rotate ? height : width));
-		if(video.currentfilter == VideoInfo::NONE)
-		{
-			if(rotate)
-			{
-				for(int y = 0 ; y < height ; ++y)
-				{
-					u32* destline = (u32*)dest;
-					u32* srccol = src + (height - y - 1);
-					for(int x = 0 ; x < width ; ++x) 
-					{
-						*destline++ = *srccol;
-						srccol += height;
-					}
-					dest += stride;
-				}
-			}
-			else
-			{
-				if(stride == width * sizeof(u32)) //bitmap is the same size, we can do one massive memcpy
-					memcpy(dest, src, width * height * sizeof(u32));
-				else
-				{
-					for(int y = 0 ; y < height ; ++y)
-					{
-						memcpy(dest, &src[y * width], width * sizeof(u32));
-						dest += stride;
-					}
-				}
-			}
-		}
-		else
-		{
-			//the alpha channels are screwy because of interpolation
-			//we need to go pixel by pixel and clear them
-			if(rotate)
-			{
-				for(int y = 0 ; y < height ; ++y)
-				{
-					u32* destline = (u32*)dest;
-					u32* srccol = src + (height - y - 1);
-					for(int x = 0 ; x < width ; ++x) 
-					{
-						*destline++ = 0xFF000000 | *srccol;
-						srccol += height;
-					}
-					dest += stride;
-				}
-			}
-			else
-			{
-				for(int y = 0 ; y < height ; ++y)
-				{
-					u32* destline = (u32*)dest;
-					for(int x = 0 ; x < width ; ++x)
-						*destline++ = 0xFF000000 | *src++;
-					dest += stride;
-				}
-			}
-		}
-	}
-	else
-	{
-		u16* src = (u16*)pixels;
-		src += (verticalOffset * (rotate ? height : width));
-		if(rotate)
-		{
-			for(int y = 0 ; y < height ; ++y)
-			{
-				u16* destline = (u16*)dest;
-				u16* srccol = src + (height - y - 1);
-				for(int x = 0 ; x < width ; ++x) 
-				{
-					*destline++ = *srccol;
-					srccol += height;
-				}
-				dest += stride;
-			}
-		}
-		else
-		{
-			if(stride == width * sizeof(u16)) //bitmap is the same size, we can do one massive memcpy
-				memcpy(dest, src, width * height * sizeof(u16));
-			else
-			{
-				for(int y = 0 ; y < height ; ++y)
-				{
-					memcpy(dest, &src[y * width], width * sizeof(u16));
-					dest += stride;
-				}
-			}
-		}
 	}
 }
 
@@ -357,20 +234,20 @@ bool NDS_Pause(bool showMsg = true)
 	paused = TRUE;
 	SPU_Pause(1);
 	while (!paused) {}
-	if (showMsg) INFO("Emulation paused\n");
+	if (showMsg) INFO("Emulation paused");
 
 	return true;
 }
 
 void NDS_UnPause(bool showMsg = true)
 {
-	if (/*romloaded &&*/ paused)
+	if (paused)
 	{
 		paused = FALSE;
 		pausedByMinimize = FALSE;
 		execute = TRUE;
 		SPU_Pause(0);
-		if (showMsg) INFO("Emulation unpaused\n");
+		if (showMsg) INFO("Emulation unpaused");
 
 	}
 }
@@ -383,7 +260,7 @@ static void nds4droid_throttle(bool allowSleep = true, int forceFrameSkip = -1)
 	if(lastskiprate != skipRate)
 	{
 		lastskiprate = skipRate;
-		mainLoopData.framestoskip = 0; // otherwise switches to lower frameskip rates will lag behind
+		mainLoopData.framestoskip = 0;
 	}
 
 	if(!mainLoopData.skipnextframe || forceFrameSkip == 0 || frameAdvance || (continuousframeAdvancing && !FastForward))
@@ -417,7 +294,7 @@ static void nds4droid_throttle(bool allowSleep = true, int forceFrameSkip = -1)
 		if (mainLoopData.framestoskip < 1)
 			mainLoopData.framestoskip += ffSkipRate;
 	}
-	else if((/*autoframeskipenab && frameskiprate ||*/ FrameLimit) && allowSleep)
+	else if((FrameLimit) && allowSleep)
 	{
 		SpeedThrottle();
 	}
@@ -445,11 +322,8 @@ static void nds4droid_throttle(bool allowSleep = true, int forceFrameSkip = -1)
 	}
 	if(execute && emu_paused && !frameAdvance)
 	{
-		// safety net against running out of control in case this ever happens.
 		NDS_UnPause(); NDS_Pause();
 	}
-
-	//ServiceDisplayThreadInvocations();
 }
 
 void nds4droid_user()
@@ -458,8 +332,6 @@ void nds4droid_user()
 
 	Hud.fps = mainLoopData.fps;
 	Hud.fps3d = mainLoopData.fps3d;
-
-	//nds4droid_display();
 
 	gfx3d.frameCtrRaw++;
 	if(gfx3d.frameCtrRaw == 60) {
@@ -470,12 +342,10 @@ void nds4droid_user()
 
 	mainLoopData.toolframecount++;
 
-	//Update_RAM_Search(); // Update_RAM_Watch() is also called.
-
 	mainLoopData.fpsframecount++;
 	mainLoopData.curticks = GetTickCount();
 	bool oneSecond = mainLoopData.curticks >= mainLoopData.fpsticks + mainLoopData.freq;
-	if(oneSecond) // TODO: print fps on screen in DDraw
+	if(oneSecond)
 	{
 		mainLoopData.fps = mainLoopData.fpsframecount;
 		mainLoopData.fpsframecount = 0;
@@ -488,12 +358,8 @@ void nds4droid_user()
 		for(int cpu=0;cpu<2;cpu++)
 		{
 			int load = 0;
-			//printf("%d: ",cpu);
 			for(int i=0;i<16;i++)
 			{
-				//blend together a few frames to keep low-framerate games from having a jittering load average
-				//(they will tend to work 100% for a frame and then sleep for a while)
-				//4 frames should handle even the slowest of games
 				s32 sample = 
 					nds.runCycleCollector[cpu][(i+0+nds.idleFrameCounter)&15]
 				+	nds.runCycleCollector[cpu][(i+1+nds.idleFrameCounter)&15]
@@ -502,7 +368,6 @@ void nds4droid_user()
 				sample /= 4;
 				load = load/8 + sample*7/8;
 			}
-			//printf("\n");
 			load = std::min(100,std::max(0,(int)(load*100/1120380)));
 			Hud.cpuload[cpu] = load;
 		}
@@ -577,10 +442,6 @@ void JNI_NOARGS(runCore)
 	int frameStart = GetTickCount();
 	nds4droid_core();
 	int frameEnd = GetTickCount();
-	/*if(frameCount ++ % 5 == 0)
-	{
-		LOGI("Core frame time %d ms", frameEnd - frameStart);
-	}*/
 }
 
 void JNI(setSoundPaused, int set)
@@ -644,7 +505,7 @@ void loadSettings(JNIEnv* env)
 	CommonSettings.spuInterpolationMode = (SPUInterpolationMode)GetPrivateProfileInt(env, "Sound","SPUInterpolation", 1, IniName);
 	CommonSettings.GFX3D_HighResolutionInterpolateColor = GetPrivateProfileBool(env, "3D", "HighResolutionInterpolateColor", 0, IniName);
 	CommonSettings.GFX3D_EdgeMark = GetPrivateProfileBool(env, "3D", "EnableEdgeMark", 0, IniName);
-	CommonSettings.GFX3D_Fog = GetPrivateProfileBool(env, "3D", "EnableFog", 1, IniName);
+	CommonSettings.GFX3D_Fog = GetPrivateProfileBool(env, "3D", "EnableFog", 0, IniName);
 	CommonSettings.GFX3D_Texture = GetPrivateProfileBool(env, "3D", "EnableTexture", 1, IniName);
 	CommonSettings.GFX3D_LineHack = GetPrivateProfileBool(env, "3D", "EnableLineHack", 0, IniName);
 	useMmapForRomLoading = GetPrivateProfileBool(env, "General", "UseMmap", true, IniName);
@@ -683,7 +544,6 @@ void enable_runfast()
 void JNI(init, jobject _inst)
 {
 #ifdef HAVE_NEON
-	//neontest();
 	enable_runfast();
 #endif
 	INFO("");
@@ -703,7 +563,6 @@ void JNI(init, jobject _inst)
 	loadSettings(env);
 
 	Desmume_InitOnce();
-	//gpu_SetRotateScreen(video.rotation);
 	NDS_FillDefaultFirmwareConfigData(&fw_config);
 	Hud.reset();
 	
@@ -765,12 +624,12 @@ void JNI(init, jobject _inst)
 	sndbuffersize = GetPrivateProfileInt(env, "Sound","SoundBufferSize2", DESMUME_SAMPLE_RATE*8/60, IniName);
 	SPU_ChangeSoundCore(sndcoretype, sndbuffersize);
 	
-	static const char* nickname = "Player";
+	static const char* nickname = "Sean";
 	fw_config.nickname_len = strlen(nickname);
 	for(int i = 0 ; i < fw_config.nickname_len ; ++i)
 		fw_config.nickname[i] = nickname[i];
 		
-	static const char* message = "ds4droid makes you happy!";
+	static const char* message = "DSdroid rocks!";
 	fw_config.message_len = strlen(message);
 	for(int i = 0 ; i < fw_config.message_len ; ++i)
 		fw_config.message[i] = message[i];
@@ -921,11 +780,15 @@ void JNI_NOARGS(closeRom)
 	NDS_Reset();
 }
 
+void JNI_NOARGS(exit)
+{
+}
+
 } //end extern "C"
 
 unsigned int GetPrivateProfileInt(JNIEnv* env, const char* lpAppName, const char* lpKeyName, int nDefault, const char* lpFileName)
 {
-	jclass javaClass = env->FindClass("com/danieru/miraie/nds/DeSmuME");
+	jclass javaClass = env->FindClass("com/seandev/ds4droid/DeSmuME");
 	if(!javaClass)
 		return nDefault;
 	jmethodID getSettingInt = env->GetStaticMethodID(javaClass, "getSettingInt","(Ljava/lang/String;I)I");

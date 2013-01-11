@@ -1,24 +1,3 @@
-//THIS SPEED THROTTLE WAS TAKEN FROM FCEUX.
-//Copyright (C) 2002 Xodnizel
-//(the code might look quite different by now, though...)
-
-/*
-	Many Modifications Copyright (C) 2009-2010 DeSmuME team
-
-	This file is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-
-	This file is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include "../common.h"
 #include "../types.h"
 #include "../debug.h"
@@ -33,11 +12,7 @@ static u64 tmethod,tfreq,afsfreq;
 static const u64 core_desiredfps = 3920763; //59.8261
 static u64 desiredfps = core_desiredfps;
 static float desiredspf = 65536.0f / core_desiredfps;
-#ifdef ANDROID
 static int desiredFpsScalerIndex = 5;
-#else
-static int desiredFpsScalerIndex = GetPrivateProfileInt("Video","FPS Scaler Index", 5, IniName);
-#endif
 
 static u64 desiredFpsScalers [] = {
 	1024,

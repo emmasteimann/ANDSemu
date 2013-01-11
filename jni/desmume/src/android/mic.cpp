@@ -13,7 +13,9 @@
 
 	You should have received a copy of the GNU General Public License
 	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
+/*
 	The NDS microphone produces 8-bit sound sampled at 16khz.
 	The sound data must be read sample-by-sample through the 
 	ARM7 SPI device (touchscreen controller, channel 6).
@@ -52,8 +54,8 @@ static int fullBuffer = -1;
 static int recordingBuffer = -1;
 static int fullBufferPos = 0;
 
-#define JNI(X,...) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
-#define JNI_NOARGS(X) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz)
+#define JNI(X,...) Java_com_seandev_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
+#define JNI_NOARGS(X) Java_com_seandev_ds4droid_DeSmuME_##X(JNIEnv* env, jclass* clazz)
 
 bool enableMicrophone = false;
 

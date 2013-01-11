@@ -40,15 +40,9 @@
 #include "firmware.h"
 #include "version.h"
 #include "slot1.h"
+#include "utils/task.h"
 
 #include "path.h"
-
-//int xxctr=0;
-//#define LOG_ARM9
-//#define LOG_ARM7
-//#define dolog (currFrameCounter>15)
-//#define LOG_TO_FILE
-//#define LOG_TO_FILE_REGS
 
 //===============================================================
 FILE *fp_dis7 = NULL;
@@ -81,6 +75,8 @@ int TotalLagFrames;
 
 TSCalInfo TSCal;
 
+Task arm9task, arm7task;
+
 namespace DLDI
 {
 	bool tryPatch(void* data, size_t size);
@@ -111,10 +107,9 @@ int NDS_Init( void) {
 	MMU_Init();
 	nds.VCount = 0;
 
-	//got to print this somewhere..
 	printf("%s\n", EMU_DESMUME_NAME_AND_VERSION());
 
-	if (Screen_Init(GFXCORE_DUMMY) != 0)
+	if (Screen_Init() != 0)
 		return -1;
 
 	gfx3d_init();
@@ -166,22 +161,6 @@ void NDS_DeInit(void) {
 		delete cheats;
 	if (cheatSearch)
 		delete cheatSearch;
-
-#ifdef LOG_ARM7
-	if (fp_dis7 != NULL) 
-	{
-		fclose(fp_dis7);
-		fp_dis7 = NULL;
-	}
-#endif
-
-#ifdef LOG_ARM9
-	if (fp_dis9 != NULL) 
-	{
-		fclose(fp_dis9);
-		fp_dis9 = NULL;
-	}
-#endif
 }
 
 BOOL NDS_SetROM(u8 * rom, u32 mask)
@@ -1657,11 +1636,6 @@ static void execHardware_hstart()
 		//when the vcount hits 262, vblank ends (oam pre-renders by one scanline)
 		execHardware_hstart_vblankEnd();
 	}
-	else if(nds.VCount==191)
-	{
-		//when the vcount hits 191, the 3d vblank occurs (maybe because OAM doesnt need to run anymore, so we can power it down, and give the 3d as much time as possible?)
-		gfx3d_VBlankSignal();
-	}
 	else if(nds.VCount==192)
 	{
 		//turn on vblank status bit
@@ -1671,6 +1645,16 @@ static void execHardware_hstart()
 		//check whether we'll need to fire vblank irqs
 		if(T1ReadWord(MMU.ARM9_REG, 4) & 0x8) MMU.reg_IF_pending[ARMCPU_ARM9] |= (1<<IRQ_BIT_LCD_VBLANK);
 		if(T1ReadWord(MMU.ARM7_REG, 4) & 0x8) MMU.reg_IF_pending[ARMCPU_ARM7] |= (1<<IRQ_BIT_LCD_VBLANK);
+		
+		//this is important for the character select in Dragon Ball Kai - Ultimate Butouden
+		//it seems if you allow the 3d to begin before the vblank, then it will get interrupted and not complete.
+		//the game needs to pick up the gxstat reg busy as clear after it finishes processing vblank.
+		//therefore, this can't happen until sometime after vblank.
+		//devil survivor 2 will have screens get stuck if this is on any other scanline.
+		//obviously 192 is the right choice.
+		gfx3d_VBlankSignal();
+		//this isnt important for any known game, but it would be nice to prove it.
+		NDS_RescheduleGXFIFO(392*2);
 	}
 
 	//write the new vcount
@@ -1869,77 +1853,6 @@ bool nds_loadstate(EMUFILE* is, int size)
 	return temp;
 }
 
-FORCEINLINE void arm9log()
-{
-#ifdef LOG_ARM9
-	if(dolog)
-	{
-		char dasmbuf[4096];
-		if(NDS_ARM9.CPSR.bits.T)
-			des_thumb_instructions_set[((NDS_ARM9.instruction)>>6)&1023](NDS_ARM9.instruct_adr, NDS_ARM9.instruction, dasmbuf);
-		else
-			des_arm_instructions_set[INDEX(NDS_ARM9.instruction)](NDS_ARM9.instruct_adr, NDS_ARM9.instruction, dasmbuf);
-
-#ifdef LOG_TO_FILE
-		if (!fp_dis9) return;
-#ifdef LOG_TO_FILE_REGS
-		fprintf(fp_dis9, "\t\t;R0:%08X R1:%08X R2:%08X R3:%08X R4:%08X R5:%08X R6:%08X R7:%08X R8:%08X R9:%08X\n\t\t;R10:%08X R11:%08X R12:%08X R13:%08X R14:%08X R15:%08X| next %08X, N:%i Z:%i C:%i V:%i\n",
-			NDS_ARM9.R[0],  NDS_ARM9.R[1],  NDS_ARM9.R[2],  NDS_ARM9.R[3],  NDS_ARM9.R[4],  NDS_ARM9.R[5],  NDS_ARM9.R[6],  NDS_ARM9.R[7], 
-			NDS_ARM9.R[8],  NDS_ARM9.R[9],  NDS_ARM9.R[10],  NDS_ARM9.R[11],  NDS_ARM9.R[12],  NDS_ARM9.R[13],  NDS_ARM9.R[14],  NDS_ARM9.R[15],
-			NDS_ARM9.next_instruction, NDS_ARM9.CPSR.bits.N, NDS_ARM9.CPSR.bits.Z, NDS_ARM9.CPSR.bits.C, NDS_ARM9.CPSR.bits.V);
-#endif
-		fprintf(fp_dis9, "%s %08X\t%08X \t%s\n", NDS_ARM9.CPSR.bits.T?"THUMB":"ARM", NDS_ARM9.instruct_adr, NDS_ARM9.instruction, dasmbuf);
-		/*if (NDS_ARM9.instruction == 0)
-		{
-			dolog = false;
-			INFO("Disassembler is stopped\n");
-		}*/
-#else
-		printf("%05d:%03d %12lld 9:%08X %08X %-30s R00:%08X R01:%08X R02:%08X R03:%08X R04:%08X R05:%08X R06:%08X R07:%08X R08:%08X R09:%08X R10:%08X R11:%08X R12:%08X R13:%08X R14:%08X R15:%08X\n",
-			currFrameCounter, nds.VCount, nds_timer, 
-			NDS_ARM9.instruct_adr,NDS_ARM9.instruction, dasmbuf, 
-			NDS_ARM9.R[0],  NDS_ARM9.R[1],  NDS_ARM9.R[2],  NDS_ARM9.R[3],  NDS_ARM9.R[4],  NDS_ARM9.R[5],  NDS_ARM9.R[6],  NDS_ARM9.R[7], 
-			NDS_ARM9.R[8],  NDS_ARM9.R[9],  NDS_ARM9.R[10],  NDS_ARM9.R[11],  NDS_ARM9.R[12],  NDS_ARM9.R[13],  NDS_ARM9.R[14],  NDS_ARM9.R[15]);  
-#endif
-	}
-#endif
-}
-
-FORCEINLINE void arm7log()
-{
-#ifdef LOG_ARM7
-	if(dolog)
-	{
-		char dasmbuf[4096];
-		if(NDS_ARM7.CPSR.bits.T)
-			des_thumb_instructions_set[((NDS_ARM7.instruction)>>6)&1023](NDS_ARM7.instruct_adr, NDS_ARM7.instruction, dasmbuf);
-		else
-			des_arm_instructions_set[INDEX(NDS_ARM7.instruction)](NDS_ARM7.instruct_adr, NDS_ARM7.instruction, dasmbuf);
-#ifdef LOG_TO_FILE
-		if (!fp_dis7) return;
-#ifdef LOG_TO_FILE_REGS
-		fprintf(fp_dis7, "\t\t;R0:%08X R1:%08X R2:%08X R3:%08X R4:%08X R5:%08X R6:%08X R7:%08X R8:%08X R9:%08X\n\t\t;R10:%08X R11:%08X R12:%08X R13:%08X R14:%08X R15:%08X| next %08X, N:%i Z:%i C:%i V:%i\n",
-			NDS_ARM7.R[0],  NDS_ARM7.R[1],  NDS_ARM7.R[2],  NDS_ARM7.R[3],  NDS_ARM7.R[4],  NDS_ARM7.R[5],  NDS_ARM7.R[6],  NDS_ARM7.R[7], 
-			NDS_ARM7.R[8],  NDS_ARM7.R[9],  NDS_ARM7.R[10],  NDS_ARM7.R[11],  NDS_ARM7.R[12],  NDS_ARM7.R[13],  NDS_ARM7.R[14],  NDS_ARM7.R[15],
-			NDS_ARM7.next_instruction, NDS_ARM7.CPSR.bits.N, NDS_ARM7.CPSR.bits.Z, NDS_ARM7.CPSR.bits.C, NDS_ARM7.CPSR.bits.V);
-#endif
-		fprintf(fp_dis7, "%s %08X\t%08X \t%s\n", NDS_ARM7.CPSR.bits.T?"THUMB":"ARM", NDS_ARM7.instruct_adr, NDS_ARM7.instruction, dasmbuf);
-		/*if (NDS_ARM7.instruction == 0)
-		{
-			dolog = false;
-			INFO("Disassembler is stopped\n");
-		}*/
-#else		
-		printf("%05d:%03d %12lld 7:%08X %08X %-30s R00:%08X R01:%08X R02:%08X R03:%08X R04:%08X R05:%08X R06:%08X R07:%08X R08:%08X R09:%08X R10:%08X R11:%08X R12:%08X R13:%08X R14:%08X R15:%08X\n",
-			currFrameCounter, nds.VCount, nds_timer, 
-			NDS_ARM7.instruct_adr,NDS_ARM7.instruction, dasmbuf, 
-			NDS_ARM7.R[0],  NDS_ARM7.R[1],  NDS_ARM7.R[2],  NDS_ARM7.R[3],  NDS_ARM7.R[4],  NDS_ARM7.R[5],  NDS_ARM7.R[6],  NDS_ARM7.R[7], 
-			NDS_ARM7.R[8],  NDS_ARM7.R[9],  NDS_ARM7.R[10],  NDS_ARM7.R[11],  NDS_ARM7.R[12],  NDS_ARM7.R[13],  NDS_ARM7.R[14],  NDS_ARM7.R[15]);
-#endif
-	}
-#endif
-}
-
 //these have not been tuned very well yet.
 static const int kMaxWork = 4000;
 static const int kIrqWait = 4000;
@@ -1959,7 +1872,7 @@ static FORCEINLINE s32 minarmtime(s32 arm9, s32 arm7)
 
 template<bool doarm9, bool doarm7>
 static /*donotinline*/ std::pair<s32,s32> armInnerLoop(
-	const u64 nds_timer_base, const s32 s32next, s32 arm9, s32 arm7) HOT;
+const u64 nds_timer_base, const s32 s32next, s32 arm9, s32 arm7) HOT;
 
 template<bool doarm9, bool doarm7>
 static /*donotinline*/ std::pair<s32,s32> armInnerLoop(
@@ -1972,8 +1885,6 @@ static /*donotinline*/ std::pair<s32,s32> armInnerLoop(
 		{
 			if(!NDS_ARM9.waitIRQ&&!nds.freezeBus)
 			{
-				arm9log();
-				debug();
 				arm9 += armcpu_exec<ARMCPU_ARM9>();
 				#ifdef DEVELOPER
 					nds_debug_continuing[0] = false;
@@ -1991,7 +1902,6 @@ static /*donotinline*/ std::pair<s32,s32> armInnerLoop(
 		{
 			if(!NDS_ARM7.waitIRQ&&!nds.freezeBus)
 			{
-				arm7log();
 				arm7 += (armcpu_exec<ARMCPU_ARM7>()<<1);
 				#ifdef DEVELOPER
 					nds_debug_continuing[1] = false;
@@ -2395,24 +2305,6 @@ void NDS_Reset()
 		//---------
 
 	}
-
-#ifdef LOG_ARM7
-	if (fp_dis7 != NULL) 
-	{
-		fclose(fp_dis7);
-		fp_dis7 = NULL;
-	}
-	fp_dis7 = fopen("D:\\desmume_dis7.asm", "w");
-#endif
-
-#ifdef LOG_ARM9
-	if (fp_dis9 != NULL) 
-	{
-		fclose(fp_dis9);
-		fp_dis9 = NULL;
-	}
-	fp_dis9 = fopen("D:\\desmume_dis9.asm", "w");
-#endif
 
 	if (firmware)
 	{
@@ -2994,25 +2886,6 @@ void NDS_suspendProcessingInput(bool suspend)
 void emu_halt() {
 	//printf("halting emu: ARM9 PC=%08X/%08X, ARM7 PC=%08X/%08X\n", NDS_ARM9.R[15], NDS_ARM9.instruct_adr, NDS_ARM7.R[15], NDS_ARM7.instruct_adr);
 	execute = false;
-#ifdef LOG_ARM9
-	if (fp_dis9)
-	{
-		char buf[256] = { 0 };
-		sprintf(buf, "halting emu: ARM9 PC=%08X/%08X\n", NDS_ARM9.R[15], NDS_ARM9.instruct_adr);
-		fwrite(buf, 1, strlen(buf), fp_dis9);
-		INFO("ARM9 halted\n");
-	}
-#endif
-
-#ifdef LOG_ARM7
-	if (fp_dis7)
-	{
-		char buf[256] = { 0 };
-		sprintf(buf, "halting emu: ARM7 PC=%08X/%08X\n", NDS_ARM7.R[15], NDS_ARM7.instruct_adr);
-		fwrite(buf, 1, strlen(buf), fp_dis7);
-		INFO("ARM7 halted\n");
-	}
-#endif
 }
 
 //returns true if exmemcnt specifies satisfactory parameters for the device, which calls this function

@@ -737,6 +737,7 @@ static inline void MMU_VRAMmapControl(u8 block, u8 VRAMBankCnt)
 	T1WriteByte(MMU.MMU_MEM[ARMCPU_ARM9][0x40], 0x240 + block, VRAMBankCnt);
 
 	//refresh all bank settings
+	//zero XX-XX-200X (long before jun 2012)
 	//these are enumerated so that we can tune the order they get applied
 	//in order to emulate prioritization rules for memory regions
 	//with multiple banks mapped.
@@ -749,10 +750,14 @@ static inline void MMU_VRAMmapControl(u8 block, u8 VRAMBankCnt)
 	MMU_VRAMmapRefreshBank(VRAM_BANK_G);
 	MMU_VRAMmapRefreshBank(VRAM_BANK_F);
 	MMU_VRAMmapRefreshBank(VRAM_BANK_E);
-	MMU_VRAMmapRefreshBank(VRAM_BANK_D);
-	MMU_VRAMmapRefreshBank(VRAM_BANK_C);
-	MMU_VRAMmapRefreshBank(VRAM_BANK_B);
+	//zero 21-jun-2012
+	//tomwi's streaming music demo sets A and D to ABG (the A is an accident).
+	//in this case, D should get priority.
+	//this is somewhat risky. will it break other things?
 	MMU_VRAMmapRefreshBank(VRAM_BANK_A);
+	MMU_VRAMmapRefreshBank(VRAM_BANK_B);
+	MMU_VRAMmapRefreshBank(VRAM_BANK_C);
+	MMU_VRAMmapRefreshBank(VRAM_BANK_D);
 
 	//printf(vramConfiguration.describe().c_str());
 	//printf("vram remapped at vcount=%d\n",nds.VCount);
@@ -1729,15 +1734,6 @@ void MMU_struct_new::write_dma(const int proc, const int size, const u32 _adr, c
 	const u32 chan = adr/12;
 	const u32 regnum = (adr - chan*12)>>2;
 
-	if(proc==0&&chan==0)
-	{
-		int zzz=9;
-	}
-
-	if(proc==1) {
-		int zzz=9;
-	}
-
 	MMU_new.dma[proc][chan].regs[regnum]->write(size,adr,val);
 }
 	
@@ -1751,13 +1747,6 @@ u32 MMU_struct_new::read_dma(const int proc, const int size, const u32 _adr)
 
 	const u32 temp = MMU_new.dma[proc][chan].regs[regnum]->read(size,adr);
 	//printf("%08lld --  read_dma: %d %d %08X = %08X\n",nds_timer,proc,size,_adr,temp);
-
-
-
-	if(temp == 0xAF00 && size == 16)
-	{
-		int zzz=9;
-	}
  
 	return temp;
 }
@@ -1817,10 +1806,6 @@ void DmaController::savestate(EMUFILE *f)
 
 void DmaController::write32(const u32 val)
 {
-	if(this->chan==0 && this->procnum==0)
-	{
-		int zzz=9;
-	}
 	if(running)
 	{
 		//desp triggers this a lot. figure out whats going on
@@ -1828,9 +1813,6 @@ void DmaController::write32(const u32 val)
 	}
 	//printf("dma %d,%d WRITE %08X\n",procnum,chan,val);
 	wordcount = val&0x1FFFFF;
-	if(wordcount==0x9FbFC || wordcount == 0x1FFFFC || wordcount == 0x1EFFFC || wordcount == 0x1FFFFF) {
-		int zzz=9;
-	}
 	u8 wasRepeatMode = repeatMode;
 	u8 wasEnable = enable;
 	u32 valhi = val>>16;
@@ -1842,11 +1824,6 @@ void DmaController::write32(const u32 val)
 	if(procnum==ARMCPU_ARM7) _startmode &= 6;
 	irq = BIT14(valhi);
 	enable = BIT15(valhi);
-
-	if(val==0x84400076 && saddr ==0x023BCEC4)
-	{
-		int zzz=9;
-	}
 
 	//if(irq) printf("!!!!!!!!!!!!IRQ!!!!!!!!!!!!!\n");
 
@@ -1864,14 +1841,6 @@ void DmaController::write32(const u32 val)
 	}
 
 	//printf("dma %d,%d set to startmode %d with wordcount set to: %08X\n",procnum,chan,_startmode,wordcount);
-if(_startmode==0 && wordcount==1) {
-	int zzz=9;
-}
-	if(enable)
-	{
-		int zzz=9;
-	}
-
 	if (enable && procnum==1 && (!(chan&1)) && _startmode==6)
 		printf("!!!---!!! WIFI DMA: %08X TO %08X, %i WORDS !!!---!!!\n", saddr, daddr, wordcount);
 
@@ -1955,12 +1924,6 @@ void DmaController::exec()
 		if(triggered)
 		{
 			//if(procnum==0) printf("vc=%03d %08lld trig type %d dma#%d w/words %d at src:%08X dst:%08X gxf:%d",nds.VCount,nds_timer,startmode,chan,wordcount,saddr,daddr,gxFIFO.size);
-			if(saddr ==0x023BCCEC && wordcount==118) {
-				int zzz=9;
-			}
-			if(startmode==0 && daddr == 0x4000400) {
-				int zzz=9;
-			}
 			running = TRUE;
 			paused = FALSE;
 			if(procnum == ARMCPU_ARM9) doCopy<ARMCPU_ARM9>();
@@ -1977,7 +1940,7 @@ void DmaController::doCopy()
 {
 	//generate a copy count depending on various copy mode's behavior
 	u32 todo = wordcount;
-	if(todo == 0) todo = 0x200000; //according to gbatek.. //TODO - this should not work this way for arm7 according to gbatek
+	if(PROCNUM == ARMCPU_ARM9) if(todo == 0) todo = 0x200000; //according to gbatek.. we've verified this behaviour on the arm7
 	if(startmode == EDMAMode_MemDisplay) 
 	{
 		todo = 128; //this is a hack. maybe an alright one though. it should be 4 words at a time. this is a whole scanline
@@ -2018,7 +1981,6 @@ void DmaController::doCopy()
 	u32 src = saddr;
 	u32 dst = daddr;
 
-
 	//if these do not use MMU_AT_DMA and the corresponding code in the read/write routines,
 	//then danny phantom title screen will be filled with a garbage char which is made by
 	//dmaing from 0x00000000 to 0x06000000
@@ -2048,7 +2010,7 @@ void DmaController::doCopy()
 		}
 	}
 
-	//printf("dma of size %d took %d cycles\n",todo*sz,time_elapsed);
+	//printf("ARM%c dma of size %d from 0x%08X to 0x%08X took %d cycles\n",PROCNUM==0?'9':'7',todo*sz,saddr,daddr,time_elapsed);
 
 	//reschedule an event for the end of this dma, and figure out how much it cost us
 	doSchedule();
@@ -2133,9 +2095,6 @@ u32 DmaController::read32()
 	ret |= dar<<21;
 	ret |= wordcount;
 	//printf("dma %d,%d READ  %08X\n",procnum,chan,ret);
-	if(ret == 0xAF000001) {
-		int zzz=9;
-	}
 	return ret;
 }
 
@@ -2473,10 +2432,7 @@ void FASTCALL _MMU_ARM9_write16(u32 adr, u16 val)
 		if (nds.power1.gfx3d_render == 0)
 			if ((adr >= 0x04000320) && (adr<=0x040003FF)) return;
 
-		if(MMU_new.is_dma(adr)) { 
-			if(val==0x02e9) {
-				int zzz=9;
-			}
+		if(MMU_new.is_dma(adr)) {
 			MMU_new.write_dma(ARMCPU_ARM9,16,adr,val); 
 			return;
 		}
@@ -2917,11 +2873,6 @@ void FASTCALL _MMU_ARM9_write32(u32 adr, u32 val)
 		{} //prohibited
 		else addon.write32(ARMCPU_ARM9, adr, val);
 		return;
-	}
-
-	if((adr&0x0F000000)==0x05000000)
-	{
-		int zzz=9;
 	}
 
 #if 0
@@ -3671,7 +3622,7 @@ void FASTCALL _MMU_ARM7_write08(u32 adr, u8 val)
 
 	mmu_log_debug_ARM7(adr, "(write08) 0x%02X", val);
 
-	if (adr < 0x4000) return;	// PU BIOS
+	if (adr < 0x02000000) return; //can't write to bios or entire area below main memory
 
 	if ( (adr >= 0x08000000) && (adr < 0x0A010000) )
 	{
@@ -3799,7 +3750,7 @@ void FASTCALL _MMU_ARM7_write16(u32 adr, u16 val)
 
 	mmu_log_debug_ARM7(adr, "(write16) 0x%04X", val);
 
-	if (adr < 0x4000) return;	// PU BIOS
+	if (adr < 0x02000000) return; //can't write to bios or entire area below main memory
 	
 	if ( (adr >= 0x08000000) && (adr < 0x0A010000) )
 	{
@@ -4197,7 +4148,7 @@ void FASTCALL _MMU_ARM7_write32(u32 adr, u32 val)
 
 	mmu_log_debug_ARM7(adr, "(write32) 0x%08X", val);
 
-	if (adr < 0x4000) return;	// PU BIOS
+	if (adr < 0x02000000) return; //can't write to bios or entire area below main memory
 
 	if ( (adr >= 0x08000000) && (adr < 0x0A010000) )
 	{

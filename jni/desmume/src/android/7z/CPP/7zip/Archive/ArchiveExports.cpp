@@ -139,6 +139,8 @@ void RegisterZip();
 void RegisterDeflate();
 void Register7z();
 void RegisterLzma();
+void RegisterRarCodecs();
+void RegisterRar();
 void RegisterBZip2();
 void RegisterBZip2Codec();
 
@@ -149,6 +151,8 @@ void Do7ZipRegistration()
 	RegisterDeflate();
 	Register7z();
 	RegisterLzma();
+	RegisterRar();
+	RegisterRarCodecs();
 	RegisterBZip2();
 	RegisterBZip2Codec();
 }

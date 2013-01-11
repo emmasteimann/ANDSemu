@@ -1,20 +1,3 @@
-/*
-	Copyright (C) 2009-2011 DeSmuME team
-
-	This file is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 2 of the License, or
-	(at your option) any later version.
-
-	This file is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with the this software.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include "filter/filter.h"
 
 class VideoInfo
@@ -33,29 +16,29 @@ public:
 
 	int currentfilter;
 
-	u8* srcBuffer;
+	CACHE_ALIGN u8* srcBuffer;
 	CACHE_ALIGN u32 buffer[16*256*192*2];
 	CACHE_ALIGN u32 filteredbuffer[16*256*192*2];
 
 	enum {
 		NONE,
+		LQ2X,
+		LQ2XS,
 		HQ2X,
+		HQ2XS,
+    	HQ4X,
 		_2XSAI,
 		SUPER2XSAI,
 		SUPEREAGLE,
 		SCANLINE,
 		BILINEAR,
 		NEAREST2X,
-		HQ2XS,
-		LQ2X,
-		LQ2XS,
-        EPX,
-        NEARESTPLUS1POINT5,
         NEAREST1POINT5,
+        NEARESTPLUS1POINT5,
+        EPX,
         EPXPLUS,
         EPX1POINT5,
         EPXPLUS1POINT5,
-    HQ4X,
 
 		NUM_FILTERS,
 	};
@@ -79,16 +62,16 @@ public:
 				width = 256;
 				height = 384;
 				break;
-			case EPX1POINT5:
-			case EPXPLUS1POINT5:
+      		case HQ4X:
+				width = 256*4;
+				height = 384*4;
 			case NEAREST1POINT5:
 			case NEARESTPLUS1POINT5:
+			case EPX1POINT5:
+			case EPXPLUS1POINT5:
 				width = 256*3/2;
 				height = 384*3/2;
 				break;
-      case HQ4X:
-				width = 256*4;
-				height = 384*4;
         break;
 			default:
 				width = 256*2;
@@ -156,6 +139,12 @@ public:
 			case NEAREST2X:
 				RenderNearest2X(src,dst);
 				break;
+			case NEAREST1POINT5:
+				RenderNearest_1Point5x(src,dst);
+				break;
+			case NEARESTPLUS1POINT5:
+				RenderNearestPlus_1Point5x(src,dst);
+				break;
 			case EPX:
 				RenderEPX(src,dst);
 				break;
@@ -167,12 +156,6 @@ public:
 				break;
 			case EPXPLUS1POINT5:
 				RenderEPXPlus_1Point5x(src,dst);
-				break;
-			case NEAREST1POINT5:
-				RenderNearest_1Point5x(src,dst);
-				break;
-			case NEARESTPLUS1POINT5:
-				RenderNearestPlus_1Point5x(src,dst);
 				break;
 		}
 	}
