@@ -233,7 +233,10 @@ class Controls {
 		case MotionEvent.ACTION_UP:
 		case MotionEvent.ACTION_CANCEL:
 			DeSmuME.touchScreenRelease();
-			if(touchButton.bitmap != null && !view.forceTouchScreen && touchButton.position.contains((int)event.getX(), (int)event.getY())) {
+			if(touchButton.bitmap != null &&
+					!view.forceTouchScreen &&
+					touchButton.position.contains((int)event.getX(), (int)event.getY()) &&
+					!view.landscapeStackScreens) {
 				DeSmuME.touchScreenMode = false;
 			}
 			break;
@@ -246,7 +249,7 @@ class Controls {
 	boolean onTouchEvent(MotionEvent event) {
 		if(xscale == 0 || yscale == 0)
 			return false;
-		if(DeSmuME.touchScreenMode || view.forceTouchScreen || view.landscapeStackScreens) 
+		if(DeSmuME.touchScreenMode || view.forceTouchScreen) 
 			return touchScreenProcess(event);	
 		else
 		{
@@ -278,19 +281,21 @@ class Controls {
 					}
 				}
 				
-				if(!pressedButton && view.alwaysTouch) 
+				if(!pressedButton && (view.alwaysTouch || view.landscapeStackScreens)) 
 					return touchScreenProcess(event);
 					
 			}
 				break;
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
-				if(touchButton.bitmap != null && touchButton.position.contains((int)event.getX(), (int)event.getY())) {
+				if(touchButton.bitmap != null &&
+						touchButton.position.contains((int)event.getX(), (int)event.getY()) &&
+						!view.landscapeStackScreens) {
 					DeSmuME.touchScreenMode = true;
 					activeTouches.clear();
 					break;
 				}
-				if(view.alwaysTouch)
+				if(view.alwaysTouch || view.landscapeStackScreens)
 					touchScreenProcess(event);
 				//FT
 			case MotionEvent.ACTION_CANCEL:

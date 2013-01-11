@@ -84,7 +84,8 @@ class DrawingThread extends Thread{
 						if(DO_DIRECT_DRAW)
 							DeSmuME.drawToSurface(view.surfaceHolder.getSurface());
 						else
-							DeSmuME.draw(view.emuBitmapMain, view.emuBitmapTouch, view.landscape && view.dontRotate);
+							DeSmuME.draw(view.emuBitmapMain, view.emuBitmapTouch,
+									view.landscape && view.dontRotate && !view.landscapeStackScreens);
 						
 						
 						if(!DO_DIRECT_DRAW) {
