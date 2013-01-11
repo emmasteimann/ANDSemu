@@ -203,7 +203,7 @@ public class Settings extends SherlockPreferenceActivity {
 		if(!prefs.contains(SHOW_FPS))
 			editor.putBoolean(SHOW_FPS, false);
 		if(!prefs.contains(FRAME_SKIP))
-			editor.putString(FRAME_SKIP, "1");
+			editor.putString(FRAME_SKIP, "0");
 		if(!prefs.contains(SCREEN_FILTER))
 			editor.putString(SCREEN_FILTER, "0");
 		if(!prefs.contains(RENDERER))
