@@ -398,8 +398,9 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 			
 			if (newWidth  == 0 || newHeight == 0) {
 				doForceResize = true;
-				Log.w(ANDSemuApplication.TAG, "Called with zero heights, skipping.");
-				return;
+				newHeight = 192 * 2;
+				newWidth = 256;
+				Log.w(ANDSemuApplication.TAG, "New resize scheduled.");
 			}
 			
 			synchronized(view.surfaceHolder) {
