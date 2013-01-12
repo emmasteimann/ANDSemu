@@ -126,34 +126,26 @@ public class EmulateActivity extends SherlockActivity implements OnSharedPrefere
 		
 		view = new NDSView(this);
 		setContentView(view);
-		Log.v(ANDSemuApplication.TAG, "NDSview set.");
 		
 		controls = new Controls(view);
-		Log.v(ANDSemuApplication.TAG, "Controls inited.");
 
 		Settings.applyDefaults(this);
 		prefs = PreferenceManager.getDefaultSharedPreferences(EmulateActivity.this);
 		prefs.registerOnSharedPreferenceChangeListener(this);
 		loadJavaSettings(null);
-		Log.v(ANDSemuApplication.TAG, "Settings loaded.");
 		
 		Intent task = getIntent();
-		Log.v(ANDSemuApplication.TAG, "Intent is not null: " + ((Boolean)(task != null)).toString());
-		Log.v(ANDSemuApplication.TAG, "Intent action is: "+ task.getAction());
 		if (task.getAction().equals(IntentActions.RESUME)) {
 			runEmulation();
 			
 		} else if (task.getAction().equals(IntentActions.LOAD)) {
-			Log.v(ANDSemuApplication.TAG, "Acting on load itent");
 			String romPath = task.getDataString();
 			runEmulation();
-			Log.v(ANDSemuApplication.TAG, "User selected Rom:" + romPath);
 			coreThread.loadRom(romPath);
 			
 		} else if (task.getAction().equals(IntentActions.LOADWITHAUTOSAVE)) {
 			
 		}
-		Log.v(ANDSemuApplication.TAG, "Intent acted upon.");
 		
 		/* On screen rotation our onCreate will be called again
 		 * with this intent. We then want to resume.
