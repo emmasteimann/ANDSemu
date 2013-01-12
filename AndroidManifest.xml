@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.danieru.miraie.nds"
-    android:versionCode="19"
-    android:versionName="miraie-19" >
+    android:versionCode="20"
+    android:versionName="miraie-20" >
 
     <uses-sdk
         android:minSdkVersion="10"
