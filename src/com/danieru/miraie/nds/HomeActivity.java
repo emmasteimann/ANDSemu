@@ -18,6 +18,7 @@ import com.actionbarsherlock.view.*;
 public class HomeActivity extends SherlockActivity implements OnSharedPreferenceChangeListener {
 
 	SharedPreferences prefs = null;
+	static boolean gameRunning = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,9 @@ public class HomeActivity extends SherlockActivity implements OnSharedPreference
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.home);
 	    updateQuickSettings(prefs);
+	    
+	    if (gameRunning)
+	    	displayResumeBtn();
 	}
 	
 	@Override
@@ -67,10 +71,7 @@ public class HomeActivity extends SherlockActivity implements OnSharedPreference
         playIntent.setData(romPath);
         startActivity(playIntent);
         
-        android.widget.Button resumeBtn = (android.widget.Button) findViewById(R.id.resumeGame);
-        resumeBtn.setVisibility(View.VISIBLE);
-        resumeBtn.setTextSize(32);
-        resumeBtn.setPadding(0, 30, 0, 30);
+        displayResumeBtn();
 	}
 	
 	/* Resume current game */
@@ -78,6 +79,14 @@ public class HomeActivity extends SherlockActivity implements OnSharedPreference
         Intent playIntent = new Intent(this, EmulateActivity.class);
         playIntent.setAction(EmulateActivity.IntentActions.RESUME);
         startActivity(playIntent);
+	}
+	
+	public void displayResumeBtn() {
+		gameRunning = true;
+        android.widget.Button resumeBtn = (android.widget.Button) findViewById(R.id.resumeGame);
+        resumeBtn.setVisibility(View.VISIBLE);
+        resumeBtn.setTextSize(32);
+        resumeBtn.setPadding(0, 30, 0, 30);
 	}
 	
 	@Override
