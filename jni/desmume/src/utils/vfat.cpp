@@ -154,6 +154,10 @@ void build_ListCallback(FsEntry* fs, EListCallbackArg arg)
 
 bool VFAT::build(const char* path, int extra_MB)
 {
+#if defined(ANDROID)
+	return false;
+#endif
+
 	dataSectors = 0;
 	currVirtPath = "";
 	currPath = path;
