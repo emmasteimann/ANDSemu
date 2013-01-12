@@ -104,7 +104,7 @@ LOCAL_SRC_FILES			:= 	desmume/src/aggdraw.cpp \
 							
 LOCAL_ARM_NEON 			:= true
 LOCAL_ARM_MODE 			:= arm
-LOCAL_CFLAGS			:= -DANDROID -DHAVE_LIBAGG -DHAVE_LIBZ -mfloat-abi=softfp -mfpu=vfpv3-d16 -marm -march=armv7-a
+LOCAL_CFLAGS			:= -DANDROID -DHAVE_LIBAGG -DHAVE_LIBZ -mfloat-abi=softfp -mfpu=vfpv3-d16 -marm -march=armv7-a -fprefetch-loop-arrays
 LOCAL_STATIC_LIBRARIES 	:= aggcompat sevenzip 
 LOCAL_LDLIBS 			:= -llog -lz -lGLESv1_CM -lEGL -ljnigraphics -lOpenSLES -landroid 
 

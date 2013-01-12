@@ -10,6 +10,3 @@
 * low level *
 - integrate android-ndk-profiler
 - merge nds4droid's dynarec when released
-- armv6 support aka desmuecompat re-add
-- up number of save slots in native code to 12
-- hide "save to slot 11" during autosaving
