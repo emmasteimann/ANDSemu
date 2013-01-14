@@ -28,6 +28,9 @@
 #ifdef HAVE_NEON
 #include "neontest.h"
 #endif
+#ifdef PROFILING
+#include "prof.h"
+#endif
 
 #define JNI(X,...) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz, __VA_ARGS__)
 #define JNI_NOARGS(X) Java_com_danieru_miraie_nds_DeSmuME_##X(JNIEnv* env, jclass* clazz)
@@ -472,6 +475,9 @@ void JNI(saveState, int slot)
 void JNI(restoreState, int slot)
 {
 	loadstate_slot(slot);
+#ifdef PROFILING
+	moncleanup();
+#endif
 }
 
 void loadSettings(JNIEnv* env)
@@ -546,6 +552,10 @@ void JNI(init, jobject _inst)
 #ifdef HAVE_NEON
 	enable_runfast();
 #endif
+#ifdef PROFILING
+	monstartup("libdesmumeneon.so");
+#endif
+
 	INFO("");
 	for(std::vector<Logger*>::iterator it = Logger::channels.begin() ; it != Logger::channels.end() ; ++it)
 		(*it)->setCallback(logCallback);

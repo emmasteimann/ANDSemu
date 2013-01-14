@@ -109,8 +109,14 @@ LOCAL_CFLAGS			:= -DANDROID -DHAVE_LIBAGG -DHAVE_LIBZ -DHAVE_NEON=1 -mfloat-abi=
 LOCAL_STATIC_LIBRARIES 	:= aggneon mathneon sevenzip 
 LOCAL_LDLIBS 			:= -llog -lz -lGLESv1_CM -lEGL -ljnigraphics -lOpenSLES -landroid 
 
+ifdef PROFILE
+-include android-ndk-profiler.mk
+LOCAL_CFLAGS += -pg -DPROFILING
+LOCAL_STATIC_LIBRARIES += andprof
+LOCAL_LDLIBS += -L$(call host-path, $(LOCAL_PATH))/$(TARGET_ARCH_ABI) -landprof
+endif
+
 include $(BUILD_SHARED_LIBRARY)
 
 include $(MY_LOCAL_PATH)/desmume/src/android/agg/agg_neon.mk
 include $(MY_LOCAL_PATH)/desmume/src/android/math-neon/Android.mk
-
