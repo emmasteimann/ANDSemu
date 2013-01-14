@@ -13,6 +13,10 @@ lint.xml
 # Mac thumbnail metadata
 .DS_Store
 
+# Profiling results
+gmon.out
+report.txt
+
 # -- Android ignores ----
 # built application files
 *.apk
