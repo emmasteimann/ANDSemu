@@ -21,6 +21,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import android.util.Log;
+
 class EmulatorThread extends Thread {
 	
 	public EmulatorThread(EmulateActivity activity) {
@@ -144,10 +146,14 @@ class EmulatorThread extends Thread {
 					soundPaused = false;
 				}
 				
+				final long frameStartTime = System.currentTimeMillis();
 				inFrameLock.lock();
 				DeSmuME.runCore();
 				inFrameLock.unlock();
 				fps = DeSmuME.runOther();
+				final long frameEndTime = System.currentTimeMillis();
+				
+				Log.i(ANDSemuApplication.TAG, String.format("Frame: %d ms", frameEndTime - frameStartTime));
 
 				activity.msgHandler.sendEmptyMessage(EmulateActivity.DRAW_SCREEN);
 		
